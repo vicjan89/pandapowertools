@@ -1,0 +1,2406 @@
+["А-120"]
+r_ohm_per_km = 0.27
+x_ohm_per_km = 0.297
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-150"]
+r_ohm_per_km = 0.21
+x_ohm_per_km = 0.288
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-16"]
+r_ohm_per_km = 1.96
+x_ohm_per_km = 0.377
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-185"]
+r_ohm_per_km = 0.17
+x_ohm_per_km = 0.279
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-25"]
+r_ohm_per_km = 1.165
+x_ohm_per_km = 0.377
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.336
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-50"]
+r_ohm_per_km = 0.588
+x_ohm_per_km = 0.355
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-70"]
+r_ohm_per_km = 0.45
+x_ohm_per_km = 0.315
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["А-95"]
+r_ohm_per_km = 0.33
+x_ohm_per_km = 0.303
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["ААБ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.083
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБ(ож)-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБл-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.076
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБл-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.074
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБл-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.073
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБл-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.071
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБл-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.091
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБл-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.087
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБл-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.083
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБл-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБл-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.078
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБл(ож)-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБлГ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБлГУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААБлУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААл-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААл-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААл-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААл-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААл-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААл-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААл-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААл-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААл-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААл(ож)-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШв-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШв-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШв-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШв-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШв-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШв-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШв-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШв-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШв-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШв(ож)-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШвсУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШвУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШп-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШп-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШп-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШп-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШп-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШп-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШп-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШп-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШп-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШпс-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШпс(ож)-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШпсУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ААШпУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АБл-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АБл-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АБл-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АБл-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АБл-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АБл-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АБл-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АБл-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АБл-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-4х16"]
+r_ohm_per_km = 1.838
+x_ohm_per_km = 0.084
+c_nf_per_km = 190.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-4х25"]
+r_ohm_per_km = 1.176
+x_ohm_per_km = 0.083
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-4х35"]
+r_ohm_per_km = 0.84
+x_ohm_per_km = 0.082
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-4х50"]
+r_ohm_per_km = 0.588
+x_ohm_per_km = 0.08
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-4х70"]
+r_ohm_per_km = 0.42
+x_ohm_per_km = 0.079
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АВБбШв-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АЖ-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АЖ-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.374
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АН-25"]
+r_ohm_per_km = 1.27
+x_ohm_per_km = 0.345
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АН-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.336
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АН-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.325
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АН-70"]
+r_ohm_per_km = 0.45
+x_ohm_per_km = 0.315
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АОСБ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АОСБ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АП-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.336
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АП-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.325
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АП-70"]
+r_ohm_per_km = 0.45
+x_ohm_per_km = 0.315
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АПН-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.336
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АПС-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АПС-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.374
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-120"]
+r_ohm_per_km = 0.27
+x_ohm_per_km = 0.347
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-150"]
+r_ohm_per_km = 0.21
+x_ohm_per_km = 0.34
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-185"]
+r_ohm_per_km = 0.17
+x_ohm_per_km = 0.365
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-240"]
+r_ohm_per_km = 0.131
+x_ohm_per_km = 0.357
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-25"]
+r_ohm_per_km = 1.146
+x_ohm_per_km = 0.396
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.374
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-70"]
+r_ohm_per_km = 0.45
+x_ohm_per_km = 0.364
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АС-95"]
+r_ohm_per_km = 0.33
+x_ohm_per_km = 0.353
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АСБ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.076
+c_nf_per_km = 202.26
+type = "cs"
+max_i_ka = 100
+["АСБ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.074
+c_nf_per_km = 239.03
+type = "cs"
+max_i_ka = 100
+["АСБ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.073
+c_nf_per_km = 257.417
+type = "cs"
+max_i_ka = 100
+["АСБ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.071
+c_nf_per_km = 294.19
+type = "cs"
+max_i_ka = 100
+["АСБ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.091
+c_nf_per_km = 114
+type = "cs"
+max_i_ka = 100
+["АСБ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.087
+c_nf_per_km = 126.87
+type = "cs"
+max_i_ka = 100
+["АСБ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.083
+c_nf_per_km = 141.58
+type = "cs"
+max_i_ka = 100
+["АСБ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 165.48
+type = "cs"
+max_i_ka = 100
+["АСБ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.078
+c_nf_per_km = 183.87
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБ2лШвУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.076
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.074
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.073
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.071
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.091
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.087
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.083
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБГ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.078
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСБл-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБл-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБл-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБл-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБл-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБл-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБл-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБл-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБл-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБлУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСБШв-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АСИ-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АСИ-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.374
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АСИ-70"]
+r_ohm_per_km = 0.45
+x_ohm_per_km = 0.364
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АСУ-50"]
+r_ohm_per_km = 0.63
+x_ohm_per_km = 0.374
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["АСШвУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АСШвУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АШВ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["АШВ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АШВУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["АШВУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["М-10"]
+r_ohm_per_km = 1.84
+x_ohm_per_km = 0.355
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-120"]
+r_ohm_per_km = 0.158
+x_ohm_per_km = 0.292
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-150"]
+r_ohm_per_km = 0.123
+x_ohm_per_km = 0.287
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-16"]
+r_ohm_per_km = 1.2
+x_ohm_per_km = 0.333
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-185"]
+r_ohm_per_km = 0.103
+x_ohm_per_km = 0.28
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-240"]
+r_ohm_per_km = 0.078
+x_ohm_per_km = 0.305
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-25"]
+r_ohm_per_km = 0.74
+x_ohm_per_km = 0.319
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-35"]
+r_ohm_per_km = 0.54
+x_ohm_per_km = 0.308
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-4"]
+r_ohm_per_km = 4.65
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-50"]
+r_ohm_per_km = 0.39
+x_ohm_per_km = 0.297
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-6"]
+r_ohm_per_km = 3.06
+x_ohm_per_km = 0.371
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-70"]
+r_ohm_per_km = 0.28
+x_ohm_per_km = 0.283
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["М-95"]
+r_ohm_per_km = 0.2
+x_ohm_per_km = 0.274
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["ПС-25"]
+r_ohm_per_km = 1.146
+x_ohm_per_km = 0.396
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["ПС-35"]
+r_ohm_per_km = 0.91
+x_ohm_per_km = 0.385
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
+["САПсш 2х10"]
+r_ohm_per_km = 3.08
+x_ohm_per_km = 0.082
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САПсш 2х16"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0754
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САПсш 2х25"]
+r_ohm_per_km = 1.165
+x_ohm_per_km = 0.0717
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х120+1х120"]
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.0745
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х120+1х25+1х120"]
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.0745
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х120+1х35+1х120"]
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.0745
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х16+1х25"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0853
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х25+1х25"]
+r_ohm_per_km = 1.165
+x_ohm_per_km = 0.099
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х25+1х25+1х25"]
+r_ohm_per_km = 1.165
+x_ohm_per_km = 0.099
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х35+1х25+1х35"]
+r_ohm_per_km = 0.85
+x_ohm_per_km = 0.095
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х35+1х35"]
+r_ohm_per_km = 0.85
+x_ohm_per_km = 0.095
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х35+1х35+1х35"]
+r_ohm_per_km = 0.85
+x_ohm_per_km = 0.095
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х50+1х25+1х50"]
+r_ohm_per_km = 0.59
+x_ohm_per_km = 0.09
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х50+1х35+1х50"]
+r_ohm_per_km = 0.59
+x_ohm_per_km = 0.09
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х50+1х50"]
+r_ohm_per_km = 0.59
+x_ohm_per_km = 0.09
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х70+1х25+1х70"]
+r_ohm_per_km = 0.42
+x_ohm_per_km = 0.086
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х70+1х70"]
+r_ohm_per_km = 0.42
+x_ohm_per_km = 0.086
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х95+1х25+1х95"]
+r_ohm_per_km = 0.32
+x_ohm_per_km = 0.753
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х95+1х35+1х95"]
+r_ohm_per_km = 0.32
+x_ohm_per_km = 0.753
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["САСПсш 3х95+1х95"]
+r_ohm_per_km = 0.32
+x_ohm_per_km = 0.0753
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СБ-120"]
+r_ohm_per_km = 0.154
+x_ohm_per_km = 0.076
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["СБ-150"]
+r_ohm_per_km = 0.124
+x_ohm_per_km = 0.074
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["СБ-185"]
+r_ohm_per_km = 0.1
+x_ohm_per_km = 0.073
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["СБ-240"]
+r_ohm_per_km = 0.077
+x_ohm_per_km = 0.071
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["СБ-25"]
+r_ohm_per_km = 0.74
+x_ohm_per_km = 0.091
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["СБ-35"]
+r_ohm_per_km = 0.53
+x_ohm_per_km = 0.087
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["СБ-50"]
+r_ohm_per_km = 0.37
+x_ohm_per_km = 0.083
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["СБ-70"]
+r_ohm_per_km = 0.265
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["СБ-95"]
+r_ohm_per_km = 0.195
+x_ohm_per_km = 0.078
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["СБГ-120"]
+r_ohm_per_km = 0.154
+x_ohm_per_km = 0.076
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["СБГ-150"]
+r_ohm_per_km = 0.124
+x_ohm_per_km = 0.074
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["СБГ-185"]
+r_ohm_per_km = 0.1
+x_ohm_per_km = 0.073
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["СБГ-240"]
+r_ohm_per_km = 0.077
+x_ohm_per_km = 0.071
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["СБГ-25"]
+r_ohm_per_km = 0.74
+x_ohm_per_km = 0.091
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["СБГ-35"]
+r_ohm_per_km = 0.53
+x_ohm_per_km = 0.087
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["СБГ-50"]
+r_ohm_per_km = 0.37
+x_ohm_per_km = 0.083
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["СБГ-70"]
+r_ohm_per_km = 0.265
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["СБГ-95"]
+r_ohm_per_km = 0.195
+x_ohm_per_km = 0.078
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["СИП 2х16"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0754
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП 2х25"]
+r_ohm_per_km = 1.2
+x_ohm_per_km = 0.0717
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП 3х16+1х35"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0865
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2 2х16"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0754
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2А 3х25+1х25+1х50"]
+r_ohm_per_km = 1.2
+x_ohm_per_km = 0.081
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2А 3х35+1х50+1х25"]
+r_ohm_per_km = 0.868
+x_ohm_per_km = 0.0791
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2А 3х50+1х25+1х50"]
+r_ohm_per_km = 0.641
+x_ohm_per_km = 0.0794
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2А 3х50+1х50+1х35"]
+r_ohm_per_km = 0.641
+x_ohm_per_km = 0.0794
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-2А 3х50+1х70+1х25"]
+r_ohm_per_km = 0.641
+x_ohm_per_km = 0.0799
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["СИП-5 2х16"]
+r_ohm_per_km = 1.91
+x_ohm_per_km = 0.0754
+c_nf_per_km = 24.0
+type = "ol"
+max_i_ka = 100
+["ЦААБ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ЦААБ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-120"]
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.08
+c_nf_per_km = 307.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-150"]
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+c_nf_per_km = 336.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-185"]
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+c_nf_per_km = 370.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-240"]
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+c_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-25"]
+r_ohm_per_km = 1.25
+x_ohm_per_km = 0.099
+c_nf_per_km = 200.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-35"]
+r_ohm_per_km = 0.894
+x_ohm_per_km = 0.095
+c_nf_per_km = 210.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-50"]
+r_ohm_per_km = 0.625
+x_ohm_per_km = 0.09
+c_nf_per_km = 226.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-70"]
+r_ohm_per_km = 0.447
+x_ohm_per_km = 0.086
+c_nf_per_km = 254.0
+type = "cs"
+max_i_ka = 100
+["ЦААБлУ-95"]
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+c_nf_per_km = 288.0
+type = "cs"
+max_i_ka = 100
+["АПвПу-1*240/25"]
+r_ohm_per_km = 0.125
+x_ohm_per_km = 0.157
+r0_ohm_per_km = 0.125
+x0_ohm_per_km = 0.157
+c_nf_per_km = 410.0
+c0_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АПвПу2г-1*120/25"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/apvpu2g-1x120/25.html
+r_ohm_per_km = 0.153
+x_ohm_per_km = 0.184
+r0_ohm_per_km = 0.153
+x0_ohm_per_km = 0.184
+c_nf_per_km = 350.0
+c0_nf_per_km = 350.0
+type = "cs"
+max_i_ka = 100
+["АПвПу2г-1*185/25"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/kabel-apvpu2g-1x185-25.html
+r_ohm_per_km = 0.0991
+x_ohm_per_km = 0.175
+r0_ohm_per_km = 0.0991
+x0_ohm_per_km = 0.175
+c_nf_per_km = 420.0
+c0_nf_per_km = 420.0
+type = "cs"
+max_i_ka = 100
+["АПвПу2г-1*240/25"]
+r_ohm_per_km = 0.0754
+x_ohm_per_km = 0.17
+r0_ohm_per_km = 0.0754
+x0_ohm_per_km = 0.17
+c_nf_per_km = 460.0
+c0_nf_per_km = 460.0
+type = "cs"
+max_i_ka = 100
+["АПвПу-3*120/25"]
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.166
+r0_ohm_per_km = 0.253
+x0_ohm_per_km = 0.166
+c_nf_per_km = 323.0
+c0_nf_per_km = 323.0
+type = "cs"
+max_i_ka = 100
+["АПвПу-3*95/16"]
+r_ohm_per_km = 0.32
+x_ohm_per_km = 0.17
+r0_ohm_per_km = 0.32
+x0_ohm_per_km = 0.17
+c_nf_per_km = 290.0
+c0_nf_per_km = 290.0
+type = "cs"
+max_i_ka = 100
+["АПвПу2г-3*95/16"]
+r_ohm_per_km = 0.193
+x_ohm_per_km = 0.092
+r0_ohm_per_km = 0.193
+x0_ohm_per_km = 0.092
+c_nf_per_km = 320.0
+c0_nf_per_km = 320.0
+type = "cs"
+max_i_ka = 100
+["АПвПу-3*50/16"]
+r_ohm_per_km = 0.641
+x_ohm_per_km = 0.184
+r0_ohm_per_km = 0.641
+x0_ohm_per_km = 0.184
+c_nf_per_km = 229.0
+c0_nf_per_km = 229.0
+type = "cs"
+max_i_ka = 100
+["АПвПг 1*800/70"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpg-10kv/apvpg-1x800-70.html
+r_ohm_per_km = 0.0221
+x_ohm_per_km = 0.157
+r0_ohm_per_km = 0.0221 #not exactly
+x0_ohm_per_km = 0.157 #not exactly
+c_nf_per_km = 770.0 #not exactly
+c0_nf_per_km = 770.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ЦАСБл 3*240"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x240.html
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.075
+r0_ohm_per_km = 0.129 #not exactly
+x0_ohm_per_km = 0.075 #not exactly
+c_nf_per_km = 410.0 #not exactly
+c0_nf_per_km = 410.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ЦАСБл 3*150"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x150.html
+r_ohm_per_km = 0.206
+x_ohm_per_km = 0.079
+r0_ohm_per_km = 0.206 #not exactly
+x0_ohm_per_km = 0.079 #not exactly
+c_nf_per_km = 410.0 #not exactly
+c0_nf_per_km = 410.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ЦАСБл 3*120"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x120.html
+r_ohm_per_km = 0.258
+x_ohm_per_km = 0.081
+r0_ohm_per_km = 0.258 #not exactly
+x0_ohm_per_km = 0.081 #not exactly
+c_nf_per_km = 410.0 #not exactly
+c0_nf_per_km = 410.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ЦАСБл 3*185"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x185.html
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+r0_ohm_per_km = 0.167 #not exactly
+x0_ohm_per_km = 0.077 #not exactly
+c_nf_per_km = 410.0 #not exactly
+c0_nf_per_km = 410.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ПвВ-70"] #https://www.ruscable.ru/info/wire/mark/pvv_kamkabel/
+r_ohm_per_km = 0.268
+x_ohm_per_km = 0.177
+r0_ohm_per_km = 0.268 #not exactly
+x0_ohm_per_km = 0.177 #not exactly
+c_nf_per_km = 260.0 #not exactly
+c0_nf_per_km = 260.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ПвПу2г-3*185/50"] #https://www.ruscable.ru/info/cable/cross-linked/kamkabel2/electrical.html
+r_ohm_per_km = 0.0991
+x_ohm_per_km = 0.161
+r0_ohm_per_km = 0.0991 #not exactly
+x0_ohm_per_km = 0.161 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["КСВ 4000"]
+r_ohm_per_km = 0.004375
+x_ohm_per_km = 0.15 #not exactly
+r0_ohm_per_km = 0.004375 #not exactly
+x0_ohm_per_km = 0.15 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 100
