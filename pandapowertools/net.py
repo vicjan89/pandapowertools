@@ -201,6 +201,10 @@ class Net:
             print('File of modes not exist!')
 
     def scheme(self):
+        print('ext_grid')
+        for i, row in self.net.ext_grid.iterrows():
+            name_bus = self.net.bus.loc[row['bus'], 'name'].ljust(28)
+            print(f'{name_bus} s_sc_max_mva={row["s_sc_max_mva"]} s_sc_min_mva={row["s_sc_min_mva"]}')
         print('line')
         for i, row in self.net.line.iterrows():
             name_from = self.net.bus.loc[row['from_bus'], 'name'].ljust(28)
