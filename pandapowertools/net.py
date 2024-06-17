@@ -20,11 +20,11 @@ class Net:
         self.path = path
         self.modes = {}
         self.net = pp.create_empty_network(name)
-        self.bus = Attrs()
-        self.line = Attrs()
-        self.trafo = Attrs()
-        self.trafo3w = Attrs()
-        self.switch = Attrs()
+        self.b = Attrs()
+        self.l = Attrs()
+        self.t = Attrs()
+        self.t3 = Attrs()
+        self.s = Attrs()
         self._update_std()
         self.et = Attrs()
         self.et.line = 'l'
@@ -65,9 +65,10 @@ class Net:
         name = f'{self.net.bus.at[from_bus, "name"]}_{self.net.bus.at[to_bus, "name"]}'
         return 'l' + russian_to_attribute_name(name)
 
-    def add_line(self, from_bus: int, to_bus: int, length: float, std_type: str):
-        index = pp.create_line(self.net, from_bus, to_bus, length, std_type)
-        self.line.__dict__.update({self._line_to_attr(index): index})
+    def add_line(self, from_bus: int, to_bus: int, length: float, std_type: str, parallel: int = 1):
+        index = pp.create_line(self.net, from_bus, to_bus, length, std_type, parallel=parallel)
+        self.net.line["endtemp_degree"] = 20
+        self.l.__dict__.update({self._line_to_attr(index): index})
 
     def _switch_to_attr(self, index):
         item = self.net.switch.loc[index]
@@ -93,7 +94,7 @@ class Net:
 
     def add_bus(self, un: float, name: str = ''):
         index = pp.create_bus(self.net, un, name)
-        self.bus.__dict__.update({'b' + russian_to_attribute_name(name): index})
+        self.b.__dict__.update({'b' + russian_to_attribute_name(name): index})
 
     def _trafo_to_attr(self, index):
         name = f'{self.net.trafo.at[index, "name"]}'
@@ -162,23 +163,23 @@ class Net:
         attrs = {}
         for i, b in self.net.bus.iterrows():
             attrs['b' + russian_to_attribute_name(b['name'])] = i
-        self.bus.__dict__.update(attrs)
+        self.b.__dict__.update(attrs)
         attrs = {}
         for i in self.net.line.index.to_list():
             attrs[self._line_to_attr(i)] = i
-        self.line.__dict__.update(attrs)
+        self.l.__dict__.update(attrs)
         attrs = {}
         for i in self.net.trafo.index.to_list():
             attrs[self._trafo_to_attr(i)] = i
-        self.trafo.__dict__.update(attrs)
+        self.t.__dict__.update(attrs)
         attrs = {}
         for i in self.net.trafo3w.index.to_list():
             attrs[self._trafo3w_to_attr(i)] = i
-        self.trafo3w.__dict__.update(attrs)
+        self.t3.__dict__.update(attrs)
         attrs = {}
         for i in self.net.switch.index.to_list():
             attrs[self._switch_to_attr(i)] = i
-        self.switch.__dict__.update(attrs)
+        self.s.__dict__.update(attrs)
         attrs = {}
         for key, value in self.net.std_types.items():
             for name_std in value:
@@ -209,7 +210,12 @@ class Net:
         for i, row in self.net.line.iterrows():
             name_from = self.net.bus.loc[row['from_bus'], 'name'].ljust(28)
             name_to = self.net.bus.loc[row['to_bus'], 'name'].rjust(28)
-            print(f'{name_from} {name_to} {row["std_type"]}')
+            l = row['length_km']
+            r = row['r_ohm_per_km'] * l
+            x = row['x_ohm_per_km'] * l
+            z = math.sqrt(r**2 + x**2)
+            std_type = row['std_type'].ljust(13)
+            print(f'{i}) {name_from} {name_to} {std_type} {l} {r:.4f}+j{x:.4f}={z:.4f}')
         print('trafo')
         for i, row in self.net.trafo.iterrows():
             name_hv = self.net.bus.loc[row['hv_bus'], 'name'].ljust(28)
@@ -225,14 +231,25 @@ class Net:
         for i, row in self.net.impedance.iterrows():
             name_from = self.net.bus.loc[row['from_bus'], 'name'].ljust(28)
             name_to = self.net.bus.loc[row['to_bus'], 'name'].rjust(28)
-            print(f'{name_from} {name_to} {row["rft_pu"]} {row["xft_pu"]}')
+            u2 = self.net.bus.loc[row['from_bus'], 'vn_kv'] ** 2
+            zb = u2 / row['sn_mva']
+            rpu = row['rtf_pu']
+            xpu = row['xtf_pu']
+            print(f'{name_from} {name_to} rft_pu={rpu} xft_pu={xpu} r={rpu*zb} x={xpu*zb}')
         print('switch')
         names = self.names_switch
         for i, row in self.net.switch.iterrows():
             print(f'{names[i]} {"closed" if row["closed"] else "opened"}')
 
+    def bus_geodata(self):
+        for i, geodata in self.net.bus_geodata.sort_index().iterrows():
+            name = self.net.bus.loc[i, 'name'].ljust(20)
+            istr = str(i).rjust(4)
+            print(f'{istr}) {name} x={geodata["x"]} y={geodata["y"]}')
 
-
+    def busxy(self, i, x, y):
+        self.net.bus_geodata.loc[i, 'x'] = x
+        self.net.bus_geodata.loc[i, 'y'] = y
 
     def add_mode(self, name: str, closed: tuple = tuple(), opened: tuple = tuple()):
         self.modes[name] = {'closed': closed, 'opened': opened}
@@ -281,7 +298,7 @@ class Net:
     def res_bus_sc(self):
         s = 'Точка КЗ | Ток КЗ, кА | r, Ом | x, Ом | z, Ом\n-|-|-|-|-\n'
         res = self.net.res_bus_sc
-        for index, row in res.iterrows():
+        for index, row in res.sort_index().iterrows():
             name = self.net.bus.loc[index, 'name'].ljust(28)
             i = f'{row.loc["ikss_ka"]:.2f}'.ljust(7)
             r = row.loc["rk_ohm"]
@@ -344,3 +361,35 @@ class Net:
     @property
     def names_bus(self):
         return self.net.bus['name'].to_list()
+
+    def place_buses(self, buses, x, y, step=1.8):
+        for bus in buses:
+            self.net.bus_geodata.loc[bus, 'x'] = x
+            self.net.bus_geodata.loc[bus, 'y'] = y
+            x += step
+
+    def move_bus(self, bus, bus_to, dx: float | None = None, dy: float | None = None):
+        if dx is not None:
+            self.net.bus_geodata.loc[bus, 'x'] = self.net.bus_geodata.loc[bus_to, 'x'] + dx
+        if dy is not None:
+            self.net.bus_geodata.loc[bus, 'y'] = self.net.bus_geodata.loc[bus_to, 'y'] + dy
+
+    def shift_buses(self, buses, bus_to: float | None=None, dx=0, dy=0):
+        if isinstance(buses, int):
+            buses = [buses]
+        if bus_to is not None:
+            dx = self.net.bus_geodata.loc[bus_to, 'x'] - self.net.bus_geodata.loc[buses[0], 'x'] + dx
+            dy = self.net.bus_geodata.loc[bus_to, 'y'] - self.net.bus_geodata.loc[buses[0], 'y'] + dy
+        for bus in buses:
+            self.net.bus_geodata.loc[bus, 'x'] += dx
+            self.net.bus_geodata.loc[bus, 'y'] += dy
+
+
+    def coord_buses(self, buses, x: float | None = None, y: float | None = None):
+        if isinstance(buses, int):
+            buses = [buses]
+        for bus in buses:
+            if x is not None:
+                self.net.bus_geodata.loc[bus, 'x'] = x
+            if y is not None:
+                self.net.bus_geodata.loc[bus, 'y'] = y

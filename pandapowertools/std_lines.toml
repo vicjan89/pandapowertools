@@ -1114,6 +1114,24 @@ x_ohm_per_km = 0.083
 c_nf_per_km = 288.0
 type = "cs"
 max_i_ka = 100
+["АВБбШв-3х150"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumajnoi-izolyaciei/aabl-6kv/kabel-aabl-3x150.html
+r_ohm_per_km = 0.206 #ААБл
+x_ohm_per_km = 0.074 #ААБл
+c_nf_per_km = 336.0 #АБл
+type = "cs"
+max_i_ka = 100
+["АВБбШв-185"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumajnoi-izolyaciei/aabl-6kv/kabel-aabl-3x185.html
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.073
+c_nf_per_km = 370.0 #взять по аналогии с другим типом
+type = "cs"
+max_i_ka = 100
+["АВБбШв-240"] #https://cable.ru/questions/id-14500.php
+r_ohm_per_km = 0.129
+x_ohm_per_km = 0.078
+c_nf_per_km = 410.0 #взять по аналогии с другим типом
+type = "cs"
+max_i_ka = 100
 ["АЖ-35"]
 r_ohm_per_km = 0.91
 x_ohm_per_km = 0.385
