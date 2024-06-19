@@ -110,7 +110,7 @@ class Net:
 
     def add_trafo3w(self, hv_bus, mv_bus, lv_bus, std_type, name):
         index = pp.create_transformer3w(self.net, hv_bus, mv_bus, lv_bus, std_type, name)
-        self.trafo3w.__dict__.update({self._trafo3w_to_attr(index): index})
+        self.t3.__dict__.update({self._trafo3w_to_attr(index): index})
 
     def add_impedance(self, from_bus, to_bus, r, x, s):
         index = pp.create_impedance(self.net, from_bus, to_bus, r, x, s)
@@ -202,20 +202,33 @@ class Net:
             print('File of modes not exist!')
 
     def scheme(self):
+        print('bus')
+        for i, row in self.net.bus.iterrows():
+            name_bus = row['name'].ljust(20)
+            istr = str(i).rjust(4)
+            try:
+                x = self.net.bus_geodata.loc[i, 'x']
+                y = self.net.bus_geodata.loc[i, 'y']
+            except:
+                x = 'No'
+                y = 'No'
+            print(f'{istr}) {name_bus} {str(row["vn_kv"]).ljust(7)} x={x} y={y}')
         print('ext_grid')
         for i, row in self.net.ext_grid.iterrows():
             name_bus = self.net.bus.loc[row['bus'], 'name'].ljust(28)
             print(f'{name_bus} s_sc_max_mva={row["s_sc_max_mva"]} s_sc_min_mva={row["s_sc_min_mva"]}')
         print('line')
         for i, row in self.net.line.iterrows():
-            name_from = self.net.bus.loc[row['from_bus'], 'name'].ljust(28)
-            name_to = self.net.bus.loc[row['to_bus'], 'name'].rjust(28)
+            name_from = self.net.bus.loc[row['from_bus'], 'name'].ljust(18)
+            name_to = self.net.bus.loc[row['to_bus'], 'name'].rjust(18)
             l = row['length_km']
             r = row['r_ohm_per_km'] * l
             x = row['x_ohm_per_km'] * l
             z = math.sqrt(r**2 + x**2)
-            std_type = row['std_type'].ljust(13)
-            print(f'{i}) {name_from} {name_to} {std_type} {l} {r:.4f}+j{x:.4f}={z:.4f}')
+            std_type = row['std_type'].ljust(18)
+            istr = str(i).rjust(3)
+            l = str(l).rjust(7)
+            print(f'{istr}) {name_from} {name_to} {row["parallel"]:.0f}*{std_type} {l} {r:.4f}+j{x:.4f}={z:.4f}')
         print('trafo')
         for i, row in self.net.trafo.iterrows():
             name_hv = self.net.bus.loc[row['hv_bus'], 'name'].ljust(28)
@@ -362,7 +375,12 @@ class Net:
     def names_bus(self):
         return self.net.bus['name'].to_list()
 
-    def place_buses(self, buses, x, y, step=1.8):
+    def place_buses(self, buses: int | list | tuple, bus_to: int | None=None, x=0, y=0, step=2):
+        if isinstance(buses, int):
+            buses = [buses]
+        if bus_to is not None:
+            x = self.net.bus_geodata.loc[bus_to, 'x'] + x
+            y = self.net.bus_geodata.loc[bus_to, 'y'] + y
         for bus in buses:
             self.net.bus_geodata.loc[bus, 'x'] = x
             self.net.bus_geodata.loc[bus, 'y'] = y
@@ -374,7 +392,15 @@ class Net:
         if dy is not None:
             self.net.bus_geodata.loc[bus, 'y'] = self.net.bus_geodata.loc[bus_to, 'y'] + dy
 
-    def shift_buses(self, buses, bus_to: float | None=None, dx=0, dy=0):
+    def shift_buses(self, buses, bus_to: int | None=None, dx=0, dy=0):
+        '''
+        Shift coords of buses. If define bus_to then shift is doing from coords bus_to and buses[0]
+        :param buses:
+        :param bus_to:
+        :param dx:
+        :param dy:
+        :return:
+        '''
         if isinstance(buses, int):
             buses = [buses]
         if bus_to is not None:
@@ -383,6 +409,17 @@ class Net:
         for bus in buses:
             self.net.bus_geodata.loc[bus, 'x'] += dx
             self.net.bus_geodata.loc[bus, 'y'] += dy
+
+    def select_rect(self, x1, y1, x2, y2):
+        if x1 > x2:
+            x1, x2 = x2, x1
+        if y1 > y2:
+            y1, y2 = y2, y1
+        buses = []
+        for i, bus_geodata in self.net.bus_geodata.iterrows():
+            if x1 <= bus_geodata['x'] <= x2 and y1 <= bus_geodata['y'] <= y2:
+                buses.append(i)
+        return buses
 
 
     def coord_buses(self, buses, x: float | None = None, y: float | None = None):
