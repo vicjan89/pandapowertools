@@ -80,6 +80,30 @@ def russian_to_attribute_name(text: str):
     text = text.replace(' ', '_')
     text = text.replace('№', '_')
     text = text.replace('=', '_')
+    text = text.replace('*', '_')
+    text = text.replace(',', '_')
     return text
 
-
+def split_str(text: str, num: int) -> list:
+    '''
+    Split string into elements with num characters
+    :param text:
+    :param num:
+    :return:
+    '''
+    res = []
+    sep = ' ,.-_'
+    while len(text) > num:
+        if text[num] in sep:
+            res.append(text[:num])
+            text = text[num:]
+        else:
+            n = num - 1
+            while text[n] not in sep and n > 1:
+                n -= 1
+            if n == 1:
+                n = num - 1
+            res.append(text[:n+1])
+            text = text[n+1:]
+    res.append(text)
+    return res

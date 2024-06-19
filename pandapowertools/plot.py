@@ -1,7 +1,8 @@
 import pandapower as pp
 from textengines.interfaces import *
+from pandapowertools.functions import split_str
 
-dx = 1.8
+dx = 2
 r = 0.1
 text_size = 0.2
 
@@ -11,8 +12,14 @@ def _node(x, y, text, te: TextEngine):
     te.circle(x, y, r=r, black=False)
     dy = text_size * 1.2
     for t in text:
-        te.label(x, y, text=t, s=text_size, place='ne')
-        y += dy
+        if len(t) > 9:
+            txts = split_str(t, 8)
+            for txt in txts[::-1]:
+                te.label(x, y, text=txt, s=text_size, place='ne')
+                y += dy
+        else:
+            te.label(x, y, text=t, s=text_size, place='ne')
+            y += dy
 
 
 def _bus(x, y, quantity, text, te: TextEngine):
@@ -106,14 +113,15 @@ def _ext_grid(x, y, te: TextEngine):
     d2 = d * 2
     d3 = d * 3
     d4 = d * 4
-    te.lines((x, y+r), (x, y+d2))
-    te.lines((x-d, y+d2),(x-d, y+d4), (x+d, y+d4), (x+d, y+d2), cycle=True)
-    te.lines((x-d, y+d2), (x+d, y+d4))
-    te.lines((x-d, y+d3), (x, y+d4))
-    te.lines((x, y+d2), (x+d, y+d3))
-    te.lines((x+d, y+d2), (x-d, y+d4))
-    te.lines((x+d, y+d3), (x, y+d4))
-    te.lines((x, y+d2), (x-d, y+d3))
+    dy = 0.3
+    te.lines((x, y+r), (x, y+d2+dy))
+    te.lines((x-d, y+d2+dy),(x-d, y+d4+dy), (x+d, y+d4+dy), (x+d, y+d2+dy), cycle=True)
+    te.lines((x-d, y+d2+dy), (x+d, y+d4+dy))
+    te.lines((x-d, y+d3+dy), (x, y+d4+dy))
+    te.lines((x, y+d2+dy), (x+d, y+d3+dy))
+    te.lines((x+d, y+d2+dy), (x-d, y+d4+dy))
+    te.lines((x+d, y+d3+dy), (x, y+d4+dy))
+    te.lines((x, y+d2+dy), (x-d, y+d3+dy))
 
 def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True):
     '''
