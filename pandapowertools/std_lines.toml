@@ -1271,7 +1271,7 @@ c_nf_per_km = 4.97
 type = "ol"
 max_i_ka = 100
 ["АС-185"]
-r_ohm_per_km = 0.17
+r_ohm_per_km = 0.1591
 x_ohm_per_km = 0.365
 c_nf_per_km = 4.97
 type = "ol"
@@ -2339,6 +2339,15 @@ r0_ohm_per_km = 0.193
 x0_ohm_per_km = 0.092
 c_nf_per_km = 320.0
 c0_nf_per_km = 320.0
+type = "cs"
+max_i_ka = 100
+["АПвВнг-3*70/16"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng/kabel-apvvng-3x70-16.html
+r_ohm_per_km = 0.268
+x_ohm_per_km = 0.196
+r0_ohm_per_km = 0.268
+x0_ohm_per_km = 0.196
+c_nf_per_km = 290.0
+c0_nf_per_km = 290.0
 type = "cs"
 max_i_ka = 100
 ["АПвПу-3*50/16"]
