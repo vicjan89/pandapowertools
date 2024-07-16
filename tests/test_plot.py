@@ -19,3 +19,8 @@ def test_split_str():
     strings = ('123 4567-89.123456789,', '012 34567890123456-78.901', '012-3456.901234567890123456789')
     for s in strings:
         print(split_str(s, 8))
+
+def test_calc_sc():
+    n = Net('../Полоцк')
+    n.load()
+    n.calc_sc()

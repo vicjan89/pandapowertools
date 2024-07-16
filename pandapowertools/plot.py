@@ -12,7 +12,7 @@ def _node(x, y, text, te: TextEngine):
     te.circle(x, y, r=r, black=False)
     dy = text_size * 1.2
     for t in text:
-        if len(t) > 9:
+        if len(t) > 8:
             txts = split_str(t, 8)
             for txt in txts[::-1]:
                 te.label(x, y, text=txt, s=text_size, place='ne')
@@ -36,6 +36,16 @@ def _bus(x, y, quantity, text, te: TextEngine):
     for t in text:
         te.label(x-0.3, y+0.1, text=t, place='ne', s=text_size)
         y += dy
+
+def _line_straight(*args, te: TextEngine, text: str = ''):
+    if isinstance(text, str):
+        text = [text]
+    if len(args) == 2:
+        (x1, y1), (x2, y2) = args
+        te.lines((x1, y1), (x2, y2))
+    for t in text:
+        te.label(x=(x1+x2)/2, y=(y1+y2)/2, s=text_size, place='ne', angle=90, text=t)
+
 
 def _line(*args, te: TextEngine, text: str = ''):
     if isinstance(text, str):
@@ -83,8 +93,14 @@ def _trafo(x1, y1, x2, y2, text, te: TextEngine):
         text = [text]
     dy = text_size * 1.2
     for t in text:
-        te.label(x1+r_trafo, y_midle, text=t, place='e', s=text_size)
-        y_midle -= dy
+        if len(t) > 6:
+            txts = split_str(t, 6)
+            for txt in txts[::-1]:
+                te.label(x1 + r_trafo-r, y_midle, text=txt, place='e', s=text_size)
+                y_midle += dy
+        else:
+            te.label(x1 + r_trafo - r, y_midle, text=t, place='e', s=text_size)
+            y_midle += dy
 
 def _trafo3w(x1, y1, x2, y2, x3, y3, text, te: TextEngine):
     y1 -= r
@@ -113,7 +129,7 @@ def _ext_grid(x, y, te: TextEngine):
     d2 = d * 2
     d3 = d * 3
     d4 = d * 4
-    dy = 0.3
+    dy = 0.5
     te.lines((x, y+r), (x, y+d2+dy))
     te.lines((x-d, y+d2+dy),(x-d, y+d4+dy), (x+d, y+d4+dy), (x+d, y+d2+dy), cycle=True)
     te.lines((x-d, y+d2+dy), (x+d, y+d4+dy))
@@ -123,12 +139,29 @@ def _ext_grid(x, y, te: TextEngine):
     te.lines((x+d, y+d3+dy), (x, y+d4+dy))
     te.lines((x, y+d2+dy), (x-d, y+d3+dy))
 
-def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True):
+def _gen(x, y, text, te: TextEngine):
+    d = 0.5
+    d2 = d * 2
+    r_gen = r * 4
+    y_midle = y - r_gen * 2
+    te.lines((x, y-r), (x, y - r_gen))
+    te.circle(x, y_midle, r_gen)
+    if isinstance(text, str):
+        text = [text]
+    dy = text_size * 1.2
+    te.label(x, y_midle, 'G', 'c', s=text_size)
+    te.label(x, y_midle, '~', 's', s=text_size)
+    for t in text:
+        te.label(x + r + r_gen, y_midle, text=t, place='e', s=text_size)
+        y_midle -= dy
+
+def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool = False, line_straight: bool = True,
+         voltage: bool = True):
     '''
     Plot pandapowerNet to TextEngine format
     :param net:
     :param te:
-    :param inexes: if True then plot inexes
+    :param indexes: if True then plot inexes
     :return:
     '''
     #plot buses
@@ -145,13 +178,19 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True):
         bus_coords[i] = (net.bus_geodata.loc[i, 'x'], net.bus_geodata.loc[i, 'y'])
     for bus, quantity in buses:
         text = [net.bus.loc[bus, 'name']]
-        text.append(f'Ik={net.res_bus_sc.loc[bus, 'ikss_ka']:.1f}кА')
+        if ikz:
+            text.append(f'Ik={net.res_bus_sc.loc[bus, "ikss_ka"]:.2f}кА')
+        if voltage:
+            text.append(f'V={net.res_bus.loc[bus, "vm_pu"]:.4f}')
         if indexes:
             text.append(f'({bus})')
         _bus(net.bus_geodata.loc[bus, 'x'], net.bus_geodata.loc[bus, 'y'], quantity, text, te)
     for node in nodes:
         text = [net.bus.loc[node, 'name']]
-        text.append(f'Ik={net.res_bus_sc.loc[node, 'ikss_ka']:.1f}кА')
+        if ikz:
+            text.append(f'Ik={net.res_bus_sc.loc[node, "ikss_ka"]:.2f} кА')
+        if voltage:
+            text.append(f'V={net.res_bus.loc[node, "vm_pu"]:.4f}')
         if indexes:
             text.append(f'({node})')
         _node(net.bus_geodata.loc[node, 'x'], net.bus_geodata.loc[node, 'y'], text, te)
@@ -159,15 +198,19 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True):
     for i, line in net.line.iterrows():
         from_bus = line['from_bus']
         to_bus = line['to_bus']
-        text = f'{net.line.loc[i, 'std_type']} {net.line.loc[i, 'length_km']} км'
-        parallel = net.line.loc[i, 'parallel']
+        text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
+        parallel = net.line.loc[i, "parallel"]
         if parallel > 1:
             text = f'{parallel}*{text}'
-        _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+        if line_straight:
+            _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+        else:
+            _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
     #plot ext_grid
     for _, ext_grid in net.ext_grid.iterrows():
-        x, y = bus_coords[ext_grid['bus']]
-        _ext_grid(x, y, te=te)
+        if ext_grid['in_service']:
+            x, y = bus_coords[ext_grid['bus']]
+            _ext_grid(x, y, te=te)
     #plot trafo
     for _, trafo in net.trafo.iterrows():
         x1, y1 = bus_coords[trafo['hv_bus']]
@@ -183,6 +226,12 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True):
         text = [trafo['name']]
         text.append(trafo['std_type'])
         _trafo3w(x1, y1, x2, y2, x3, y3, text, te=te)
+    #plot gen
+    for _, gen in net.gen.iterrows():
+        x, y = bus_coords[gen['bus']]
+        text = [gen['name']]
+        text.append(f'{gen['p_mw']}МВт')
+        _gen(x, y, text, te=te)
     #plot impedance
     for i, impedance in net.impedance.iterrows():
         from_bus = impedance['from_bus']
