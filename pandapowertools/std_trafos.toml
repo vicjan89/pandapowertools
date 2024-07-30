@@ -4,8 +4,8 @@
 "vn_lv_kv" = 11.0
 "vk_percent" = 10.5
 "vkr_percent" = 0.698
-"pfe_kw" = 27.0
-"i0_percent" = 0.9
+"pfe_kw" = 27.0 #потери холостого хода
+"i0_percent" = 0.9 #ток холостого хода в % от номинального
 "shift_degree" = 330.0
 ["ТДН-10000/110_115"]
 "sn_mva" = 10.0
@@ -78,9 +78,12 @@
 "vn_lv_kv" = 0.4
 "vk_percent" = 4.5
 "vkr_percent" = 2.0
+"vk0_percent" = 39.75 #рассчитано по данным из книги Шабада
+"vkr0_percent" = 11.925 #рассчитано по данным из книги Шабада
 "pfe_kw" = 0.31
 "i0_percent" = 2.6
 "shift_degree" = 0.0
+"vector_group" = "Yyn"
 ["ТМ-1000_10"]
 "sn_mva" = 1.0
 "vn_hv_kv" = 10.0
@@ -282,6 +285,16 @@
 "pfe_kw" = 5.1
 "i0_percent" = 1.1
 "shift_degree" = 0.0
+["S-2500/35-0.4"]
+"sn_mva" = 2.5
+"vn_hv_kv" = 35.0
+"vn_lv_kv" = 0.4
+"vk_percent" = 6.5
+"vkr_percent" = 1.06
+"pfe_kw" = 3.0
+"i0_percent" = 1.1 #недостоверные данные
+"shift_degree" = 330.0
+"vector_group" = "Dyn"
 ["ТМ-30_10.5"]
 "sn_mva" = 0.03
 "vn_hv_kv" = 10.5
@@ -373,7 +386,8 @@
 "vkr_percent" = 2.0
 "pfe_kw" = 1.08
 "i0_percent" = 2.1
-"shift_degree" = 0.0
+"shift_degree" = 350.0
+"vector_group" = "Yd"
 ["ТМ-400_6_0.23"] # https://eltexkom.com/tm-400-610-04-transformator/
 "sn_mva" = 0.4
 "vn_hv_kv" = 6
@@ -383,6 +397,7 @@
 "pfe_kw" = 0.75
 "i0_percent" = 1.0
 "shift_degree" = 350.0
+"vector_group" = "Yd"
 ["ТМ-4000_10.5"]
 "sn_mva" = 4.0
 "vn_hv_kv" = 10.5

@@ -1276,6 +1276,12 @@ x_ohm_per_km = 0.365
 c_nf_per_km = 4.97
 type = "ol"
 max_i_ka = 100
+["АС-185_ВЛ110"] #https://powersystem.info/index.php?title=%D0%A1%D1%85%D0%B5%D0%BC%D0%B0_%D0%B7%D0%B0%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F_%D0%BB%D0%B8%D0%BD%D0%B8%D0%B8_%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%D0%B0%D1%87%D0%B8
+r_ohm_per_km = 0.1591
+x_ohm_per_km = 0.4558
+c_nf_per_km = 8.5987
+type = "ol"
+max_i_ka = 100
 ["АС-240"]
 r_ohm_per_km = 0.131
 x_ohm_per_km = 0.357
@@ -2341,13 +2347,31 @@ c_nf_per_km = 320.0
 c0_nf_per_km = 320.0
 type = "cs"
 max_i_ka = 100
-["АПвВнг-3*70/16"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng/kabel-apvvng-3x70-16.html
+["АПвВнг-3*70/16-10кВ"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng/kabel-apvvng-3x70-16.html
 r_ohm_per_km = 0.268
 x_ohm_per_km = 0.196
 r0_ohm_per_km = 0.268
 x0_ohm_per_km = 0.196
 c_nf_per_km = 290.0
 c0_nf_per_km = 290.0
+type = "cs"
+max_i_ka = 100
+["АПвВнг-1*95-35кВ"] #obsidian\work\factory_documentation\Кабели силовые\Кабели из сшитого полиэтилена 6-35.pdf
+r_ohm_per_km = 0.320
+x_ohm_per_km = 0.128 #прокладка треугольником
+r0_ohm_per_km = 0.320
+x0_ohm_per_km = 0.128 #прокладка треугольником
+c_nf_per_km = 149.0
+c0_nf_per_km = 149.0
+type = "cs"
+max_i_ka = 100
+["АПвВнг-1*50-35кВ"] #obsidian\work\factory_documentation\Кабели силовые\Кабели из сшитого полиэтилена 6-35.pdf
+r_ohm_per_km = 0.641
+x_ohm_per_km = 0.144 #прокладка треугольником
+r0_ohm_per_km = 0.641
+x0_ohm_per_km = 0.144 #прокладка треугольником
+c_nf_per_km = 121.0
+c0_nf_per_km = 121.0
 type = "cs"
 max_i_ka = 100
 ["АПвПу-3*50/16"]
@@ -2359,7 +2383,7 @@ c_nf_per_km = 229.0
 c0_nf_per_km = 229.0
 type = "cs"
 max_i_ka = 100
-["АПвПг 1*800/70"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpg-10kv/apvpg-1x800-70.html
+["АПвПг 1*800/70-10кВ"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpg-10kv/apvpg-1x800-70.html
 r_ohm_per_km = 0.0221
 x_ohm_per_km = 0.157
 r0_ohm_per_km = 0.0221 #not exactly
