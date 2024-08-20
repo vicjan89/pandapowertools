@@ -2455,3 +2455,39 @@ c_nf_per_km = 370.0 #not exactly
 c0_nf_per_km = 370.0 #not exactly
 type = "cs"
 max_i_ka = 100
+["ВВГ 4*6"]
+r_ohm_per_km = 3.09
+x_ohm_per_km = 0.09
+r0_ohm_per_km = 3.09 #not exactly
+x0_ohm_per_km = 0.09 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ВВГ 3х70+1х25"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-pvx-izolyacziej-(0,66;-1kv)/vvg/kabel-vvg-3h70-1h25/
+r_ohm_per_km = 0.28
+x_ohm_per_km = 0.0612
+r0_ohm_per_km = 0.28 #not exactly
+x0_ohm_per_km = 0.0612 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 0.211
+["ВВГ 3х35+1х16"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-pvx-izolyacziej-(0,66;-1kv)/vvg/kabel-vvg-3h35-1h16/
+r_ohm_per_km = 0.54
+x_ohm_per_km = 0.0637
+r0_ohm_per_km = 0.54 #not exactly
+x0_ohm_per_km = 0.0637 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 0.137
+["ВВГ 3х120+1х70"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-pvx-izolyacziej-(0,66;-1kv)/vvg/kabel-vvg-3h120-1h70/
+r_ohm_per_km = 0.158
+x_ohm_per_km = 0.0602
+r0_ohm_per_km = 0.158 #not exactly
+x0_ohm_per_km = 0.0602 #not exactly
+c_nf_per_km = 370.0 #not exactly
+c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 0.302

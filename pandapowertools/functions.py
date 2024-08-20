@@ -44,6 +44,7 @@ def russian_to_attribute_name(text: str):
     text = text.replace('=', '_')
     text = text.replace('*', '_')
     text = text.replace(',', '_')
+    text = text.replace('+', '_')
     return text
 
 def split_str(text: str, num: int) -> list:

@@ -24,7 +24,7 @@ def _node(x, y, text, te: TextEngine, length: int = 8):
             y += dy
 
 
-def _bus(x, y, quantity, text, te: TextEngine):
+def _bus(x, y, quantity, text, te: TextEngine, dx: float = 2.0):
     if isinstance(text, str):
         text = [text]
     quantity -= 1
@@ -147,13 +147,9 @@ def _impedance(coord1, coord2, te: TextEngine, text: list[str] | str = '', lengt
         text = [text]
     x1, y1 = coord1
     x2, y2 = coord2
-    if x1 > x2:
-        x1, x2 = x2, x1
-    if y1 > y2:
-        y1, y2 = y2, y1
     middle_x = (x1 + x2) / 2
     middle_y = (y1 + y2) / 2
-    angle = math.atan2(x2-x1, y2-y1)
+    angle = math.atan2(x1-x2, y2-y1)
     coords = _resistor(middle_x, middle_y, angle, te)
     x1, y1 = _turn(x1, y1 + r, x1, y1, angle)
     x2, y2 = _turn(x2, y2 - r, x2, y2, angle)
@@ -161,15 +157,19 @@ def _impedance(coord1, coord2, te: TextEngine, text: list[str] | str = '', lengt
     te.lines((x2, y2), coords[0])
     y = (y1 + y2) / 2
     dx = text_size * 1.2
-    x = (x1 + x2) / 2 - r * 5
+    x = (x1 + x2) / 2 - r * 5 - dx
+    angle_degree = math.degrees(angle) + 90
+    if 180 <= angle_degree <= 360:
+        angle_degree -= 180
     for t in text:
         if len(t) > length:
             txts = split_str(t, length)
             for txt in txts[::-1]:
-                te.label(x, y, text=txt, s=text_size, place='s', angle=90)
+                x_turned, y_turned = _turn(x, y, middle_x, middle_y, angle)
+                te.label(x_turned, y_turned, text=txt, s=text_size, place='c', angle=angle_degree)
                 x -= dx
         else:
-            te.label(x, y, text=t, s=text_size, place='s', angle=90)
+            te.label(x, y, text=t, s=text_size, place='c', angle=angle_degree)
             x -= dx
 
 
@@ -267,25 +267,29 @@ def _gen(x, y, text, te: TextEngine):
 def _capacitor(x, y, text, te: TextEngine):
     d = r * 7
     w = r * 5
-    w1 = r * 3
     w2 = r * 2
-    w3 = r
     te.lines((x, y-r), (x, y-d))
     te.lines((x, y-d-r-d), (x, y-d-r))
     te.lines((x-w, y-d), (x+w, y-d))
     te.lines((x-w, y-d-r), (x+w, y-d-r))
-    te.lines((x-w1, y-d-r-d), (x+w1, y-d-r-d))
-    te.lines((x-w2, y-d*2-r*2), (x+w2, y-d*2-r*2))
-    te.lines((x-w3, y-d*2-r*3), (x+w3, y-d*2-r*3))
+    _ground(x, y - d - d, te)
     dy = text_size * 1.2
     for t in text:
         te.label(x + w2, y - r, text=t, place='e', s=text_size)
         y -= dy
 
+def _ground(x, y, te: TextEngine):
+    w1 = r * 3
+    w2 = r * 2
+    w3 = r
+    te.lines((x-w1, y), (x+w1, y))
+    te.lines((x-w2, y-r), (x+w2, y-r))
+    te.lines((x-w3, y-r*2), (x+w3, y-r*2))
+
 
 def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool = False, line_straight: bool = True,
          voltage: bool = False, impedance: bool = False, length_node: int = 8, length_trafo: int = 6, length: int = 20,
-         plot_bus = True):
+         plot_bus = True, bus_step: float = 2.):
     '''
     Plot pandapowerNet to TextEngine format
     :param net:
@@ -331,27 +335,31 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
         _node(net.bus_geodata.loc[node, 'x'], net.bus_geodata.loc[node, 'y'], text, te, length_node)
     #plot lines
     for i, line in net.line.iterrows():
-        from_bus = line['from_bus']
-        to_bus = line['to_bus']
-        parallel = net.line.loc[i, "parallel"]
-        if impedance:
-            l = line['length_km']
-            text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
-            _impedance(bus_coords[from_bus], bus_coords[to_bus], te, text, length)
-        else:
-            text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
-            if parallel > 1:
-                text = f'{parallel}*{text}'
-            if line_straight:
-                _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+        if line['in_service']:
+            from_bus = line['from_bus']
+            to_bus = line['to_bus']
+            parallel = net.line.loc[i, "parallel"]
+            if impedance:
+                l = line['length_km']
+                text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
+                _impedance(bus_coords[from_bus], bus_coords[to_bus], te, text, length)
             else:
-                _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+                text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
+                if parallel > 1:
+                    text = f'{parallel}*{text}'
+                if line_straight:
+                    _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+                else:
+                    _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
     #plot ext_grid
     for _, ext_grid in net.ext_grid.iterrows():
         if ext_grid['in_service']:
             x, y = bus_coords[ext_grid['bus']]
             if impedance:
-                text = [ext_grid['name']]
+                name = ext_grid['name']
+                if name is None:
+                    name = ''
+                text = [name]
                 u_bus = net.bus.at[ext_grid['bus'], 'vn_kv']
                 i_kz_max = ext_grid['s_sc_max_mva'] / u_bus / math.sqrt(3)
                 zs = define_c(u_bus, "max", 10) * u_bus / i_kz_max / math.sqrt(3)
@@ -433,5 +441,17 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
             v = net.bus.at[shunt['bus'], 'vn_kv']
             rc = v ** 2 / shunt['p_mw']
             xc = v ** 2 / shunt['q_mvar']
-            text = [f'{rc=:.4f}', f'x={xc:.4f}']
-            _capacitor(x, y, text, te=te)
+            sign = '+'
+            capacitor = False
+            if xc < 0:
+                xc = -xc
+                sign = '-'
+                capacitor = True
+            rc_str = f'{rc:4.4f}' if rc < 9999 else f'{rc:.4e}'
+            xc_str = f'{xc:4.4f}' if xc < 9999 else f'{xc:.4e}'
+            text = [f'{rc_str}{sign}j{xc_str}']
+            if capacitor:
+                _capacitor(x, y, text, te=te)
+            else:
+                _impedance((x, y), (x, y - r * 11), te=te, text=text, length=length)
+                _ground(x, y - r * 10, te=te)

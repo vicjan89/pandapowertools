@@ -50,8 +50,8 @@
 "sn_mv_mva" = 40
 "sn_lv_mva" = 40
 "vn_hv_kv" = 115.0
-"vn_mv_kv" = 6
-"vn_lv_kv" = 6
+"vn_mv_kv" = 6.3
+"vn_lv_kv" = 6.3
 "vk_hv_percent" = 10.5
 "vk_mv_percent" = 15
 "vk_lv_percent" = 10.5

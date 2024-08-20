@@ -8,7 +8,7 @@ from collections import Counter
 import pandapower as pp
 
 
-from pandapowertools.functions import russian_to_attribute_name
+from pandapowertools.functions import russian_to_attribute_name, define_c
 
 
 class Attrs:
@@ -69,6 +69,9 @@ class Net:
         self.l.__dict__.update({self._line_to_attr(index): index})
         return index
 
+    def line(self, n, in_service = True):
+        self.net.line.at[n, 'in_service'] = in_service
+
     def line_impedance(self, index: int):
         l = self.net.line.at[index, 'length_km']
         p = self.net.line.at[index, 'parallel']
@@ -125,36 +128,29 @@ class Net:
         self.t3.__dict__.update({self._trafo3w_to_attr(index): index})
         return index
 
-    def add_impedance(self, from_bus: int, to_bus: int, r: float, x: float):
+    def add_impedance(self, from_bus: int, to_bus: int, x: float, r: float = .0):
         '''
         создаёт элемент сопротивления (например токоограничивающий реактор)
         :param from_bus:
         :param to_bus:
-        :param r: Ohm
         :param x: Ohm
+        :param r: Ohm
         :return:
         '''
         return pp.create_line_from_parameters(net=self.net, from_bus=from_bus, to_bus=to_bus, length_km=1, r_ohm_per_km=r,
                                            x_ohm_per_km=x, c_nf_per_km=0, max_i_ka=100)
 
-    # def add_impedance2(self, from_bus: int, to_bus: int, r: float, x: float, s: float):
-    #     '''
-    #     создаёт элемент сопротивления (например токоограничивающий реактор)
-    #     :param from_bus:
-    #     :param to_bus:
-    #     :param r: Ohm
-    #     :param x: Ohm
-    #     :param s: MVA
-    #     :return:
-    #     '''
-    #     u = self.net.bus.loc[from_bus, "vn_kv"]
-    #     zb = u ** 2 / s
-    #     r_pu = r / zb
-    #     x_pu = x / zb
-    #     return pp.create_impedance(net=self.net, from_bus=from_bus, to_bus=to_bus, rft_pu=r_pu, rtf_pu=r_pu,
-    #                                xtf_pu=x_pu, xft_pu=x_pu, sn_mva=s)
     def add_shunt(self, bus: int, q, p = 0):
         return pp.create_shunt(self.net, bus, q, p)
+
+    def add_ext_grid_as_shunt(self, bus: int, ikz_ka: float, name = '', rx = 0):
+        u_bus = self.net.bus.at[bus, 'vn_kv']
+        z = u_bus / ikz_ka / math.sqrt(3)
+        x = math.sqrt(z ** 2 / (rx ** 2 + 1))
+        r = rx * x
+        p = u_bus ** 2 / r
+        q = u_bus ** 2 / x
+        return pp.create_shunt(net=self.net, bus=bus, q_mvar=q, p_mw=p, name=name)
 
     def add_gen(self, bus, vn_kv, sn_mva, xdss_pu, cos_phi, rdss_ohm=0, name=''):
         return pp.create_gen(self.net, bus, sn_mva=sn_mva, vn_kv=vn_kv, name=name, xdss_pu=xdss_pu, rdss_ohm=rdss_ohm,
@@ -224,8 +220,6 @@ class Net:
 
     def add_load_rx(self, bus, r_ohm: float, x_ohm: float):
         v = self.net.bus.at[bus, 'vn_kv']
-        # if not r_ohm:
-        #     r_ohm = x_ohm * 0.001
         p = v ** 2 / r_ohm
         q = v ** 2 / x_ohm
         return pp.create_load(net=self.net, bus=bus, p_mw=p, q_mvar=q,
@@ -248,18 +242,6 @@ class Net:
         u = self.net.bus.loc[bus, "vn_kv"]
         q = - u ** 2 * 100 * math.pi * nf * c
         pp.create_shunt_as_capacitor(net=self.net, bus=bus, q_mvar=q, loss_factor=0.0000000001)
-
-    # def add_l2(self, from_bus, to_bus, l, nf):
-    #     '''
-    #     Создаёт индуктивность для расчётов PowerFlow (например для представления фильтра высших гармоник)
-    #     :param bus:
-    #     :param l: H
-    #     :param nf: номер гармоники для которой выполняется расчёт
-    #     :return:
-    #     '''
-    #     u = self.net.bus.loc[from_bus, "vn_kv"]
-    #     x = 100 * math.pi * nf * l / u / u
-    #     self.add_impedance(from_bus, to_bus, r=0, x=x, s=1)
 
     def add_l(self, from_bus, to_bus, l, nf=1):
         '''
@@ -340,7 +322,7 @@ class Net:
             print('File of modes not exist!')
 
     def scheme(self, find: str = ''):
-        res = []
+        res = [f'name={self.net.name}']
         res.append('bus')
         for i, row in self.net.bus.sort_index().iterrows():
             name_bus = row['name'].ljust(20)
@@ -357,7 +339,11 @@ class Net:
         for i, row in self.net.ext_grid.sort_index().iterrows():
             name_bus = self.net.bus.loc[row['bus'], 'name'].ljust(28)
             in_service = '' if row['in_service'] else ' (not in_service)'
-            name = row['name'].ljust(25)
+            name = row['name']
+            if name:
+                name = name.ljust(25)
+            else:
+                name = ' ' * 25
             res.append(f'{i}) {name_bus} {name} s_sc_max_mva={row["s_sc_max_mva"]} s_sc_min_mva={row["s_sc_min_mva"]}'
                        f'{in_service}')
         res.append('gen')
@@ -426,11 +412,16 @@ class Net:
         res.append('shunt')
         for i, row in self.net.shunt.sort_index().iterrows():
             name_bus = self.net.bus.loc[row['bus'], 'name'].ljust(28)
+            name = row['name']
+            if name:
+                name = name.ljust(25)
+            else:
+                name = ' ' * 25
             in_service = '' if row['in_service'] else ' (not in_service)'
             v = self.net.bus.at[row['bus'], 'vn_kv']
             r = v ** 2 / row['p_mw']
             x = v ** 2 / row['q_mvar']
-            res.append(f'{i}) {name_bus} p_mw={row["p_mw"]:.5f} q_mvar={row["q_mvar"]:.5f}'
+            res.append(f'{i}) name={name} bus={name_bus} p_mw={row["p_mw"]:.5f} q_mvar={row["q_mvar"]:.5f}'
                        f' {r=} {x=} {in_service}')
         if find:
             for row in res:
