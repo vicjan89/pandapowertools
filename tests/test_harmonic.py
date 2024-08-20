@@ -18,7 +18,7 @@ def test_i2lc():
 
 def test_nr():
     for h in range(2, 41):
-        n = Net(r'..\miory_with_filters')
+        n = Net(r'..\..\calcsetting\calcsetting\source\Miory\miory_only_filter')
         n.load()
         recalc_imp_harm(n.net, h)
         res = []
@@ -28,14 +28,14 @@ def test_nr():
         i_c = []
         power = []
         for v in range(1, 11):
-            u = v / 100
+            u = v / 10
             n.net.ext_grid.vm_pu[0] = u
             n.calc_pf_pgm(max_iteration=1000)
             i = n.net.res_line.loc[3, 'i_ka']
-            vm = n.net.res_bus.loc[0, 'vm_pu']
+            vm = n.net.res_bus.loc[4, 'vm_pu']
             s = math.sqrt(n.net.res_ext_grid.loc[0, 'p_mw'] ** 2 + n.net.res_ext_grid.loc[0, 'q_mvar'] ** 2)
             i_calc = s / 10 / u / math.sqrt(3)
-            res.append(f'{u=} v_bus0={vm}')
+            res.append(f'{u=} v_bus4={vm}')
             x.append(u)
             y.append(i)
             z.append(vm)

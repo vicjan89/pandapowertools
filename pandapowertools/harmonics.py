@@ -58,21 +58,21 @@ def get_i_by_u(net: Net, bus: int, v_pu: float):
     k = v / v_pu
     i /= k
     net.net.ext_grid.loc[0, 'vm_pu'] = temp
-    return i, v, k, s
+    return i
 
 def get_u_by_i(net: Net, bus: int, i: float):
     '''
     Возвращает напряжение на шине bus при котором ток ext_grid будет равен i
     :param net: pandapowertools Net
-    :param bus:
-    :param i:
-    :return: # напряжение в процентах от номинального
+    :param bus: номер шины на которой измеряется напряжение и для номинального напряжения которой рассчитан ток ВГ
+    :param i: kA
+    :return: напряжение в относительных единицах
     '''
     temp = net.net.ext_grid.loc[0, 'vm_pu']
     net.net.ext_grid.loc[0, 'vm_pu'] = 1
     net.calc_pf_pgm()
     v = net.net.res_bus.loc[bus, 'vm_pu']
-    vn_kv = net.net.bus.loc[net.net.ext_grid.bus[0], 'vn_kv']
+    vn_kv = net.net.bus.loc[bus, 'vn_kv']
     s = math.sqrt(net.net.res_ext_grid.loc[0, 'p_mw'] ** 2 + net.net.res_ext_grid.loc[0, 'q_mvar'] ** 2)
     i_v1pu = s / net.net.ext_grid.loc[0, 'vm_pu'] / vn_kv / math.sqrt(3)
     k = i_v1pu / i
