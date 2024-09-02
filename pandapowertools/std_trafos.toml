@@ -398,7 +398,7 @@
 "i0_percent" = 1.0
 "shift_degree" = 350.0
 "vector_group" = "Yd"
-["ТМ-4000_10.5"]
+["ТМ-4000_10.5/0.4"]
 "sn_mva" = 4.0
 "vn_hv_kv" = 10.5
 "vn_lv_kv" = 0.4
@@ -408,6 +408,16 @@
 "i0_percent" = 3.0
 "shift_degree" = 0.0
 "vkr0_percent" = 0.83
+["ТМ-4000_10/0.69Dyn"]
+"sn_mva" = 4.0
+"vn_hv_kv" = 10
+"vn_lv_kv" = 0.69
+"vk_percent" = 8
+"vkr_percent" = 0.001
+"pfe_kw" = 8.5
+"i0_percent" = 3.0
+"shift_degree" = 330
+"vector_group" = "Dyn"
 ["ТМ-4000/35_35"]
 "sn_mva" = 4.0
 "vn_hv_kv" = 35.0
@@ -554,6 +564,16 @@
 "pfe_kw" = 4.1
 "i0_percent" = 6.0
 "shift_degree" = 0.0
+["ТМ-800_10/0.4Dyn"]
+"sn_mva" = 0.8
+"vn_hv_kv" = 10
+"vn_lv_kv" = 0.4
+"vk_percent" = 6
+"vkr_percent" = 0.0
+"pfe_kw" = 4.1
+"i0_percent" = 6.0
+"shift_degree" = 330
+"vector_group" = "Dyn"
 ["ТМВ-630_10.5"]
 "sn_mva" = 0.63
 "vn_hv_kv" = 10.5
@@ -776,6 +796,18 @@
 "vk0_percent" = 6 #not exactli
 "vkr0_percent" = 0.875 #not exactli
 "vector_group" = "Dyn"
+["ТМГ33-2000_10/0.4Dyn"]
+"sn_mva" = 2.0
+"vn_hv_kv" = 10
+"vn_lv_kv" = 0.4
+"vk_percent" = 6
+"vkr_percent" = 0.9272
+"pfe_kw" = 2.13
+"i0_percent" = 2.0
+"shift_degree" = 330.0
+"vk0_percent" = 5.5125
+"vkr0_percent" = 0.976
+"vector_group" = "Dyn"
 ["ТМГ33-1000_10"]
 "sn_mva" = 1
 "vn_hv_kv" = 10
@@ -788,7 +820,7 @@
 "vk0_percent" = 5.5125 #not exactli
 "vkr0_percent" = 0.976 #not exactli
 "vector_group" = "Dyn"
-["ТМГ33-2500_10"]
+["ТМГ33-2500_10/0.4Dyn"]
 "sn_mva" = 2.5
 "vn_hv_kv" = 10
 "vn_lv_kv" = 0.4
