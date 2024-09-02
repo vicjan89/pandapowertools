@@ -8,20 +8,24 @@ dx = 2
 r = 0.1
 text_size = 0.2
 
-def _node(x, y, text, te: TextEngine, length: int = 8):
+def _node(x, y, text, te: TextEngine, length: int = 8, xt: int | None = None, yt: int | None = None):
     if isinstance(text, str):
         text = [text]
+    if xt is None:
+        xt = x
+    if yt is None:
+        yt = y
     te.circle(x, y, r=r, black=False)
     dy = text_size * 1.2
     for t in text:
         if len(t) > length:
             txts = split_str(t, length)
             for txt in txts[::-1]:
-                te.label(x, y, text=txt, s=text_size, place='ne')
-                y += dy
+                te.label(xt, yt, text=txt, s=text_size, place='ne')
+                yt += dy
         else:
-            te.label(x, y, text=t, s=text_size, place='ne')
-            y += dy
+            te.label(xt, yt, text=t, s=text_size, place='ne')
+            yt += dy
 
 
 def _bus(x, y, quantity, text, te: TextEngine, dx: float = 2.0):
@@ -39,14 +43,34 @@ def _bus(x, y, quantity, text, te: TextEngine, dx: float = 2.0):
         te.label(x-0.3, y+0.1, text=t, place='ne', s=text_size)
         y += dy
 
-def _line_straight(*args, te: TextEngine, text: str = ''):
+def _line_straight(*args, te: TextEngine, text: str = '', length: int = 20):
     if isinstance(text, str):
         text = [text]
     if len(args) == 2:
         (x1, y1), (x2, y2) = args
+        if x1 > x2:
+            x1, x2 = x2, x1
+            y1, y2 = y2, y1
+        middle_x = (x1 + x2) / 2
+        middle_y = (y1 + y2) / 2
         te.lines((x1, y1), (x2, y2))
+        y = (y1 + y2) / 2
+        dx = text_size * 1.2
+        x = (x1 + x2) / 2 - r * 5 - dx
+        angle = math.atan2(x1-x2, y2-y1)
+        angle_degree = math.degrees(angle) + 90
+    # for t in text:
+    #     te.label(x=(x1+x2)/2 - text_size, y=(y1+y2)/2, s=text_size, place='ne', angle=90, text=t)
     for t in text:
-        te.label(x=(x1+x2)/2 - text_size, y=(y1+y2)/2, s=text_size, place='ne', angle=90, text=t)
+        if len(t) > length:
+            txts = split_str(t, length)
+            for txt in txts[::-1]:
+                x_turned, y_turned = _turn(x, y, middle_x, middle_y, angle)
+                te.label(x_turned, y_turned, text=txt, s=text_size, place='c', angle=angle_degree)
+                x -= dx
+        else:
+            te.label(x, y, text=t, s=text_size, place='c', angle=angle_degree)
+            x -= dx
 
 
 def _line(*args, te: TextEngine, text: list[str] | str = '', length: int = 14):
@@ -132,7 +156,7 @@ def _switch_line(x1, y1, x2, y2, te: TextEngine, closed: bool = False):
     angle = math.atan2(y2-y1, x2-x1)
     _switch(x, y, angle, te, closed)
 
-def _reactor(x1, y1, x2, y2, te: TextEngine, text: list[str] | str = ''):
+def _reactor(x1, y1, x2, y2, te: TextEngine, text: list[str] | str = '', length: int = 6):
     x2 = x1
     y2 += r
     y1 -= r
@@ -141,6 +165,18 @@ def _reactor(x1, y1, x2, y2, te: TextEngine, text: list[str] | str = ''):
     te.circle(x1, y_midle, r=r_impedance, st_angle=180, en_angle=90, black=False)
     te.lines((x1, y1), (x2, y_midle+r_impedance))
     te.lines((x2, y2), (x1, y_midle), (x1-r_impedance, y_midle))
+    if isinstance(text, str):
+        text = [text]
+    dy = text_size * 1.2
+    for t in text:
+        if len(t) > length:
+            txts = split_str(t, length)
+            for txt in txts[::-1]:
+                te.label(x1 + r_impedance-r, y_midle, text=txt, place='e', s=text_size)
+                y_midle += dy
+        else:
+            te.label(x1 + r_impedance - r, y_midle, text=t, place='e', s=text_size)
+            y_midle += dy
 
 def _impedance(coord1, coord2, te: TextEngine, text: list[str] | str = '', length: int = 20):
     if isinstance(text, str):
@@ -190,11 +226,22 @@ def _trafo(x1, y1, x2, y2, text, te: TextEngine, length: int = 6, vector_group: 
         if 'D' in vector_group:
             y = y_midle + r_trafo - r
             te.lines((x1 - r2, y - r), (x1 + r2, y - r), (x1, y + r2), cycle=True)
+        if 'd' in vector_group:
+            y = y_midle - r_trafo + r
+            te.lines((x1 - r2, y - r), (x1 + r2, y - r), (x1, y + r2), cycle=True)
+        if 'Y' in vector_group:
+            y = y_midle + r_trafo - r
+            te.lines((x1, y), (x1, y + r2))
+            te.lines((x1, y), (x1 - r2, y - r))
+            te.lines((x1, y), (x1 + r2, y - r))
         if 'y' in vector_group:
             y = y_midle - r_trafo + r
             te.lines((x1, y), (x1, y + r2))
             te.lines((x1, y), (x1 - r2, y - r))
             te.lines((x1, y), (x1 + r2, y - r))
+        if 'N' in vector_group:
+            y = y_midle + r_trafo - r
+            te.lines((x1, y), (x1 + r2, y))
         if 'n' in vector_group:
             y = y_midle - r_trafo + r
             te.lines((x1, y), (x1 + r2, y))
@@ -211,7 +258,7 @@ def _trafo(x1, y1, x2, y2, text, te: TextEngine, length: int = 6, vector_group: 
             te.label(x1 + r_trafo - r, y_midle, text=t, place='e', s=text_size)
             y_midle += dy
 
-def _trafo3w(x1, y1, x2, y2, x3, y3, text, te: TextEngine):
+def _trafo3w(x1, y1, x2, y2, x3, y3, text, te: TextEngine, vector_group: str = ''):
     y1 -= r
     y2 += r
     y3 += r
@@ -225,6 +272,36 @@ def _trafo3w(x1, y1, x2, y2, x3, y3, text, te: TextEngine):
     y = y_midle-r_trafo + r
     te.lines((x2, y2), (x2, y), (x1-r2-r-r_trafo, y))
     te.lines((x3, y3), (x3, y), (x1+r2+r+r_trafo, y))
+    if vector_group:
+        w = n = -r_trafo + r
+        for letter in vector_group:
+            if letter in 'DYN':
+                y = y_midle + r_trafo - r
+            if letter == 'D':
+                    te.lines((x1 - r2, y - r), (x1 + r2, y - r), (x1, y + r2), cycle=True)
+            if letter == 'Y':
+                te.lines((x1, y), (x1, y + r2))
+                te.lines((x1, y), (x1 - r2, y - r))
+                te.lines((x1, y), (x1 + r2, y - r))
+            if letter == 'N':
+                te.lines((x1, y), (x1 + r2, y))
+            if letter in 'dyn':
+                y = y_midle - r_trafo + r
+            if letter == 'd':
+                if w > 0 and n < 0:
+                    n = -n
+                te.lines((x1 - r2 + w, y - r), (x1 + r2 + w, y - r), (x1 + w, y + r2), cycle=True)
+                w = -w
+            if letter == 'y':
+                if w > 0 and n < 0:
+                    n = -n
+                te.lines((x1 + w, y), (x1 + w, y + r2))
+                te.lines((x1 + w, y), (x1 - r2 + w, y - r))
+                te.lines((x1 + w, y), (x1 + r2 + w, y - r))
+                w = -w
+            if letter == 'n':
+                te.lines((x1 + n, y), (x1 + r2 + n, y))
+                n = -n
     if isinstance(text, str):
         text = [text]
     dy = text_size * 1.2
@@ -332,7 +409,13 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
             text.append(f'V={net.res_bus.loc[node, "vm_pu"]:.4f}')
         if indexes:
             text.append(f'({node})')
-        _node(net.bus_geodata.loc[node, 'x'], net.bus_geodata.loc[node, 'y'], text, te, length_node)
+        x = xt = net.bus_geodata.loc[node, 'x']
+        if 'xt' in net.bus_geodata:
+            xt = net.bus_geodata.loc[node, 'xt']
+        y = yt = net.bus_geodata.loc[node, 'y']
+        if 'yt' in net.bus_geodata:
+            yt = net.bus_geodata.loc[node, 'yt']
+        _node(x, y, text, te, length_node, xt, yt)
     #plot lines
     for i, line in net.line.iterrows():
         if line['in_service']:
@@ -344,13 +427,18 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                 text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
                 _impedance(bus_coords[from_bus], bus_coords[to_bus], te, text, length)
             else:
-                text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
-                if parallel > 1:
-                    text = f'{parallel}*{text}'
-                if line_straight:
-                    _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+                if line['c_nf_per_km']:
+                    text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
+                    if parallel > 1:
+                        text = f'{parallel}*{text}'
+                    if line_straight:
+                        _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text, length=length)
+                    else:
+                        _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
                 else:
-                    _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
+                    l = line['length_km']
+                    text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
+                    _reactor(*bus_coords[from_bus], *bus_coords[to_bus], te=te, text=text, length=length_trafo)
     #plot ext_grid
     for _, ext_grid in net.ext_grid.iterrows():
         if ext_grid['in_service']:
@@ -403,7 +491,10 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
         x3, y3 = bus_coords[trafo['lv_bus']]
         text = [trafo['name']]
         text.append(trafo['std_type'])
-        _trafo3w(x1, y1, x2, y2, x3, y3, text, te=te)
+        vector_group = ''
+        if 'vector_group' in trafo:
+            vector_group = trafo['vector_group']
+        _trafo3w(x1, y1, x2, y2, x3, y3, text, te=te, vector_group=vector_group)
     #plot gen
     for _, gen in net.gen.iterrows():
         x, y = bus_coords[gen['bus']]

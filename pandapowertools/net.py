@@ -19,8 +19,8 @@ class Net:
     def __init__(self, name: str, path: str = ''):
         self.name = name
         self.path = path
-        self.modes = {}
         self.net = pp.create_empty_network(name)
+        self.net['modes'] = {}
         self.b = Attrs()
         self.l = Attrs()
         self.t = Attrs()
@@ -152,8 +152,8 @@ class Net:
         q = u_bus ** 2 / x
         return pp.create_shunt(net=self.net, bus=bus, q_mvar=q, p_mw=p, name=name)
 
-    def add_gen(self, bus, vn_kv, sn_mva, xdss_pu, cos_phi, rdss_ohm=0, name=''):
-        return pp.create_gen(self.net, bus, sn_mva=sn_mva, vn_kv=vn_kv, name=name, xdss_pu=xdss_pu, rdss_ohm=rdss_ohm,
+    def add_gen(self, bus, vn_kv, p_mw, xdss_pu, cos_phi=1, rdss_ohm=0, name=''):
+        return pp.create_gen(self.net, bus, p_mw=p_mw, vn_kv=vn_kv, name=name, xdss_pu=xdss_pu, rdss_ohm=rdss_ohm,
                              cos_phi=cos_phi)
 
     def _calc_s_for_ext_grid(self, u_bus, ikz_max, ikz_min, i1kz_max: float | None = None):
@@ -264,14 +264,6 @@ class Net:
         else:
             path = file
         pp.to_json(self.net, path)
-        if self.modes:
-            file = f'{name}_modes.json'
-            if self.path:
-                path = os.path.join(self.path, file)
-            else:
-                path = file
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(self.modes, f, ensure_ascii=False, indent=4)
 
     def load(self):
         file = f'{self.name}.json'
@@ -309,17 +301,6 @@ class Net:
                     prefix = key[0] + '_'
                 attrs[f'{prefix}{russian_to_attribute_name(name_std)}'] = name_std
         self.std.__dict__.update(attrs)
-
-        try:
-            file = f'{self.name}_modes.json'
-            if self.path:
-                path = os.path.join(self.path, file)
-            else:
-                path = file
-            with open(path, 'r', encoding='utf-8') as f:
-                self.modes = json.load(f)
-        except FileNotFoundError:
-            print('File of modes not exist!')
 
     def scheme(self, find: str = ''):
         res = [f'name={self.net.name}']
@@ -429,17 +410,23 @@ class Net:
                     print(row)
         else:
             print('\n'.join(res))
-# calc
-    def add_mode(self, name: str, closed: tuple = tuple(), opened: tuple = tuple()):
-        self.modes[name] = {'closed': closed, 'opened': opened}
+# modes
+    def create_mode(self, name):
+        self.net['modes'][name] = []
+
+    def add2mode(self, name: str, element: str, param: str, value: str | float, index: int | None = None):
+        self.net['modes'][name].append((element, param, index, value))
 
     def make_mode(self, mode_name):
-        if mode_name in self.modes:
-            self.net.switch.loc[self.modes[mode_name]['closed'], 'closed'] = True
-            self.net.switch.loc[self.modes[mode_name]['opened'], 'closed'] = False
+        if mode_name in self.net['modes']:
+            for element, param, index, value in self.net['modes'][mode_name]:
+                if index is None:
+                    self.net[element][param] = value
+                else:
+                    self.net[element].loc[index, param] = value
         else:
             print('Mode not specified')
-
+# calc
     def calc_pf_pgm(self, algorithm='nr', mode_name='', max_iteration=20, verbal=False):
         tolerance = 1e-8
         if mode_name:
@@ -630,30 +617,66 @@ class Net:
     def clear_geodata(self):
         self.net.bus_geodata.drop(self.net.bus_geodata.index, inplace=True)
 
-    def scale_geodata(self, n):
-        self.net.bus_geodata.x *= n
-        self.net.bus_geodata.y *= n
+    def scale_geodata(self, nx, ny=None):
+        '''
+        Масштабирует все координаты по x в nx раз, по y в ny раз. Если ny не задано то масштабирует обе координаты в nx раз
+        :param nx:
+        :param ny:
+        :return:
+        '''
+        if ny is None:
+            ny = nx
+        self.net.bus_geodata.x *= nx
+        self.net.bus_geodata.y *= ny
 
-    def busxy(self, i, x, y):
-        self.net.bus_geodata.loc[i, 'x'] = x
-        self.net.bus_geodata.loc[i, 'y'] = y
+    def busxy(self, i, coords: tuple | None = None):
+        if coords:
+            x, y = coords
+            self.net.bus_geodata.loc[i, 'x'] = x
+            self.net.bus_geodata.loc[i, 'y'] = y
+            self.net.bus_geodata.loc[i, 'xt'] = x
+            self.net.bus_geodata.loc[i, 'yt'] = y
+        else:
+            x = self.net.bus_geodata.loc[i, 'x']
+            y = self.net.bus_geodata.loc[i, 'y']
+            xt = self.net.bus_geodata.loc[i, 'xt']
+            yt = self.net.bus_geodata.loc[i, 'yt']
+            return x, y, xt, yt
 
     def place_buses(self, buses: int | list | tuple, bus_to: int | None=None, x=0, y=0, step=2):
+        '''
+        Размещает шины горизонтально слева направо
+        :param buses: список размещаемых шин
+        :param bus_to: номер шины, координаты которой берутся для расчёта начальной точки
+        :param x: смещение от шины bus_to
+        :param y: смещение от шины bus_to
+        :param step: шаг по x через который размещаются шины
+        :return:
+        '''
         if isinstance(buses, int):
             buses = [buses]
         if bus_to is not None:
             x = self.net.bus_geodata.loc[bus_to, 'x'] + x
             y = self.net.bus_geodata.loc[bus_to, 'y'] + y
+            xt = self.net.bus_geodata.loc[bus_to, 'xt'] + x
+            yt = self.net.bus_geodata.loc[bus_to, 'yt'] + y
+        else:
+            xt = x
+            yt = y
         for bus in buses:
             self.net.bus_geodata.loc[bus, 'x'] = x
             self.net.bus_geodata.loc[bus, 'y'] = y
+            self.net.bus_geodata.loc[bus, 'xt'] = xt
+            self.net.bus_geodata.loc[bus, 'yt'] = yt
             x += step
 
     def move_bus(self, bus, bus_to, dx: float | None = None, dy: float | None = None):
         if dx is not None:
             self.net.bus_geodata.loc[bus, 'x'] = self.net.bus_geodata.loc[bus_to, 'x'] + dx
+            self.net.bus_geodata.loc[bus, 'xt'] = self.net.bus_geodata.loc[bus_to, 'xt'] + dx
         if dy is not None:
             self.net.bus_geodata.loc[bus, 'y'] = self.net.bus_geodata.loc[bus_to, 'y'] + dy
+            self.net.bus_geodata.loc[bus, 'yt'] = self.net.bus_geodata.loc[bus_to, 'yt'] + dy
 
     def shift_buses(self, buses, bus_to: int | None=None, dx=0, dy=0):
         '''
@@ -668,10 +691,24 @@ class Net:
             buses = [buses]
         if bus_to is not None:
             dx = self.net.bus_geodata.loc[bus_to, 'x'] - self.net.bus_geodata.loc[buses[0], 'x'] + dx
+            dxt = self.net.bus_geodata.loc[bus_to, 'xt'] - self.net.bus_geodata.loc[buses[0], 'xt'] + dx
             dy = self.net.bus_geodata.loc[bus_to, 'y'] - self.net.bus_geodata.loc[buses[0], 'y'] + dy
-        for bus in buses:
-            self.net.bus_geodata.loc[bus, 'x'] += dx
-            self.net.bus_geodata.loc[bus, 'y'] += dy
+            dyt = self.net.bus_geodata.loc[bus_to, 'yt'] - self.net.bus_geodata.loc[buses[0], 'yt'] + dy
+        self.net.bus_geodata.loc[buses, 'x'] += dx
+        self.net.bus_geodata.loc[buses, 'xt'] += dxt
+        self.net.bus_geodata.loc[buses, 'y'] += dy
+        self.net.bus_geodata.loc[buses, 'yt'] += dyt
+
+    def shift_text(self, buses, dx=0, dy=0):
+        '''
+        Shift coords of texts buses.
+        :param buses:
+        :param dx:
+        :param dy:
+        :return:
+        '''
+        self.net.bus_geodata.loc[buses, 'xt'] += dx
+        self.net.bus_geodata.loc[buses, 'yt'] += dy
 
     def select_rect(self, x1, y1, x2, y2):
         if x1 > x2:
@@ -690,16 +727,23 @@ class Net:
         for bus in buses:
             if x is not None:
                 self.net.bus_geodata.loc[bus, 'x'] = x
+                self.net.bus_geodata.loc[bus, 'xt'] = x
             if y is not None:
                 self.net.bus_geodata.loc[bus, 'y'] = y
+                self.net.bus_geodata.loc[bus, 'yt'] = y
 
     def turn_right(self):
         temp = self.net.bus_geodata.x
+        tempt = self.net.bus_geodata.xt
         self.net.bus_geodata.x = self.net.bus_geodata.y
+        self.net.bus_geodata.xt = self.net.bus_geodata.yt
         self.net.bus_geodata.y = temp
+        self.net.bus_geodata.yt = tempt
 
     def mirror_x(self):
         self.net.bus_geodata.y *= -1
+        self.net.bus_geodata.yt *= -1
 
     def mirror_y(self):
         self.net.bus_geodata.x *= -1
+        self.net.bus_geodata.xt *= -1

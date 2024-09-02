@@ -46,3 +46,17 @@ def test_merge_serial_lines():
     n = Net('..\miory')
     n.load()
     n.merge_serial_lines(0, 1)
+
+def test_add_trafo():
+    n = Net('test')
+    n.load()
+    n.add_std()
+    n.add_trafo(0, 1, n.std.t_ТМ_4000_10_0_69Dyn, 'TR08')
+    print('test')
+
+def test_calc_sc():
+    n = Net(r'..\..\calcsetting\calcsetting\source\Miory\Miory_ikz')
+    n.load()
+    n.calc_sc()
+    print(n.res_bus_sc())
+
