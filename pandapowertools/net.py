@@ -6,6 +6,7 @@ from collections import Counter
 
 
 import pandapower as pp
+import pandas as pd
 
 
 from pandapowertools.functions import russian_to_attribute_name, define_c
@@ -138,10 +139,10 @@ class Net:
         :return:
         '''
         return pp.create_line_from_parameters(net=self.net, from_bus=from_bus, to_bus=to_bus, length_km=1, r_ohm_per_km=r,
-                                           x_ohm_per_km=x, c_nf_per_km=0, max_i_ka=100)
+                                           x_ohm_per_km=x, c_nf_per_km=0, max_i_ka=100, endtemp_degree=20)
 
-    def add_shunt(self, bus: int, q, p = 0):
-        return pp.create_shunt(self.net, bus, q, p)
+    def add_shunt(self, bus: int, q, p = None, name=''):
+        return pp.create_shunt(self.net, bus, q, p, name=name)
 
     def add_ext_grid_as_shunt(self, bus: int, ikz_ka: float, name = '', rx = 0):
         u_bus = self.net.bus.at[bus, 'vn_kv']
@@ -165,8 +166,8 @@ class Net:
         return item
 
 
-    def add_ext_grid(self, bus, ikz_max: float, ikz_min: float | None = None, i1kz_max: float | None = None,
-                     i1kz_min: float | None = None, name = ''):
+    def add_ext_grid(self, bus, ikz_max: float | None = None, ikz_min: float | None = None, i1kz_max: float | None = None,
+                     i1kz_min: float | None = None, name = '', **kwargs):
         '''
         Create extension grid
         :param bus: bus where the slack is connected
@@ -176,15 +177,17 @@ class Net:
         :param i1kz_min: single phase ikz in minimum mode in kiloampere
         :return:
         '''
-        if not ikz_min:
-            ikz_min = ikz_max
-        u_bus = self.net.bus.at[bus, 'vn_kv']
-        item = self._calc_s_for_ext_grid(u_bus, ikz_max, ikz_min, i1kz_max)
-        item['bus'] = bus
+        item = {'bus': bus}
         item['rx_max'] = 0.1
         item['r0x0_max'] = 0.1
         item['rx_min'] = 0.1
         item['name'] = name
+        item.update(kwargs)
+        if ikz_max:
+            if not ikz_min:
+                ikz_min = ikz_max
+            u_bus = self.net.bus.at[bus, 'vn_kv']
+            item.update(self._calc_s_for_ext_grid(u_bus, ikz_max, ikz_min, i1kz_max))
         return pp.create_ext_grid(net=self.net, **item)
 
     def ext_grid(self, n, in_service = True):
@@ -231,7 +234,7 @@ class Net:
         return pp.create_line_from_parameters(net=self.net, from_bus=from_bus, to_bus=to_bus, length_km=1, r_ohm_per_km=0,
                                               x_ohm_per_km=x, c_nf_per_km=0, max_i_ka=100, name=name)
 
-    def add_c(self, bus, c, nf=1):
+    def add_c(self, bus, c=1, nf=1):
         '''
         Создаёт конденсаторную батарею для расчётов PowerFlow (например для представления фильтра высших гармоник)
         :param bus:
@@ -316,6 +319,9 @@ class Net:
                 y = 'No'
             in_service = '' if row['in_service'] else ' (not in_service)'
             res.append(f'{istr}) {name_bus} {str(row["vn_kv"]).ljust(7)} x={x} y={y}{in_service}')
+        if find == 'bus':
+            print('\n'.join(res))
+            return
         res.append('ext_grid')
         for i, row in self.net.ext_grid.sort_index().iterrows():
             name_bus = self.net.bus.loc[row['bus'], 'name'].ljust(28)
@@ -450,10 +456,9 @@ class Net:
             self.make_mode(mode_name)
         for i in range(15):
             try:
-                u = self.net.ext_grid.at[0, 'vm_pu']
                 pp.runpp(self.net, tolerance_mva=tolerance, algorithm=algorithm,
                          calculate_voltage_angles=False, max_iteration=max_iteration, init=init,
-                         check_connectivity=True, distributed_slack=False)#, init_vm_pu=u, init_va_degree=.0)
+                         check_connectivity=True, distributed_slack=False)
                 if verbal:
                     print(f'PowerFlow calculated witn tolerance {tolerance}')
                 break
@@ -463,10 +468,10 @@ class Net:
             if verbal:
                 print(f'PowerFlow not calculated with tolerance {tolerance}')
 
-    def res_line(self):
-        names = self.names_line
-        res = {names[i]: value['i_ka'] for i, value in self.net.res_line.sort_index().iterrows()}
-        return res
+    # def res_line(self):
+    #     names = self.names_line
+    #     res = {names[i]: value['i_ka'] for i, value in self.net.res_line.sort_index().iterrows()}
+    #     return res
 
     @property
     def res(self):
@@ -475,6 +480,30 @@ class Net:
         print(f'\nres_ext_grid\n{self.net.res_ext_grid}')
         print(f'\nres_load\n{self.net.res_load}')
         print(f'\nres_shunt\n{self.net.res_shunt}')
+
+    def calc_c(self, bus: int):
+        '''
+        Создаёт режим для расчёта токов замыкания на землю в сетях с изолированной, компенсированнной или резистовной
+        нейтралью
+        :param bus: номер шины на которой однофазное замыкание на землю
+        :return:
+        '''
+        trafo = self.net.trafo.copy()
+        self.net.trafo.drop(self.net.trafo.index, inplace=True)
+        ext_grids = self.net.ext_grid.copy()
+        self.net.ext_grid.drop(self.net.ext_grid.index, inplace=True)
+        shunt = self.net.shunt.copy()
+        self.net.shunt.drop(self.net.shunt.index, inplace=True)
+        gen = self.net.gen.copy()
+        self.net.gen.drop(self.net.gen.index, inplace=True)
+        ext_grid = self.add_ext_grid(bus=bus, vm_pu=3)
+        self.calc_pf()
+        self.net.ext_grid.drop(ext_grid, inplace=True)
+        self.net.trafo = trafo
+        self.net.ext_grid = ext_grids
+        self.net.shunt = shunt
+        self.net.gen = gen
+
 
     def create_mode_magnetizing_current_inrush(self, k: float=4):
         self.net.load['in_service'] = False
@@ -520,20 +549,33 @@ class Net:
               f'ikz_with_neitral - ikz_without_neitral={(ik_neitral - ik) * 3}')
 
     def res_bus_sc(self):
+        '''
+        Возвращает словарь ключами которого являются индексы шин а значением кортеж из имени шины, тока КЗ в А,
+        полного сопротивления в Ом и, если есть, полное сопротивление нулевой последовательности
+        '''
         res = {}
         for i, value in self.net.res_bus_sc.sort_index().iterrows():
-            res_row = [self.net.bus.loc[i, 'name'], float(value['ikss_ka']) * 1000,
-                       math.sqrt(value['rk_ohm']**2 + value['xk_ohm']**2)]
-            if 'rk0_ohm' in value:
-                z0 = math.sqrt(value['rk0_ohm'] ** 2 + value['xk0_ohm'] ** 2)
-                res_row.append(z0)
-            res[i] = res_row
+            if i in self.net.bus_geodata.index:
+                res_row = [self.net.bus.loc[i, 'name'], float(value['ikss_ka']) * 1000,
+                           math.sqrt(value['rk_ohm']**2 + value['xk_ohm']**2)]
+                if 'rk0_ohm' in value:
+                    z0 = math.sqrt(value['rk0_ohm'] ** 2 + value['xk0_ohm'] ** 2)
+                    res_row.append(z0)
+                res[i] = res_row
         return res
 
     def res_line_sc(self, bus):
         names = self.names_line
         res = {i: [names[i], float(value['ikss_ka']) * 1000]
                for i, value in self.net.res_line_sc.xs(bus, level=1).sort_index().iterrows()}
+        return res
+
+    def res_line(self, line_index: int | list | None = None):
+        if line_index is None:
+            line_index = self.net.line.index
+        names = self.names_line
+        res = {names[index]: values['i_ka'] * 1000
+               for index, values in self.net.res_line.loc[line_index].sort_index().iterrows()}
         return res
 
     def res_bus_sc_md(self):
@@ -643,6 +685,9 @@ class Net:
             yt = self.net.bus_geodata.loc[i, 'yt']
             return x, y, xt, yt
 
+    def busbar(self, i, x1, y1, x2):
+        self.net.bus_geodata.at[i, 'coords'] = [(x1, y1), (x2, y1)]
+
     def place_buses(self, buses: int | list | tuple, bus_to: int | None=None, x=0, y=0, step=2):
         '''
         Размещает шины горизонтально слева направо
@@ -656,21 +701,20 @@ class Net:
         if isinstance(buses, int):
             buses = [buses]
         if bus_to is not None:
-            x = self.net.bus_geodata.loc[bus_to, 'x'] + x
-            y = self.net.bus_geodata.loc[bus_to, 'y'] + y
-            xt = self.net.bus_geodata.loc[bus_to, 'xt'] + x
-            yt = self.net.bus_geodata.loc[bus_to, 'yt'] + y
+            xel = xt = self.net.bus_geodata.loc[bus_to, 'x'] + x
+            yel = yt = self.net.bus_geodata.loc[bus_to, 'y'] + y
         else:
-            xt = x
-            yt = y
+            xel = xt = x
+            yel = yt = y
         for bus in buses:
-            self.net.bus_geodata.loc[bus, 'x'] = x
-            self.net.bus_geodata.loc[bus, 'y'] = y
+            self.net.bus_geodata.loc[bus, 'x'] = xel
+            self.net.bus_geodata.loc[bus, 'y'] = yel
             self.net.bus_geodata.loc[bus, 'xt'] = xt
             self.net.bus_geodata.loc[bus, 'yt'] = yt
-            x += step
+            xel += step
+            xt += step
 
-    def move_bus(self, bus, bus_to, dx: float | None = None, dy: float | None = None):
+    def move_bus(self, bus, bus_to, dx: float | None = None, dy: float | None = None): #TODO реализовать перемещение coords
         if dx is not None:
             self.net.bus_geodata.loc[bus, 'x'] = self.net.bus_geodata.loc[bus_to, 'x'] + dx
             self.net.bus_geodata.loc[bus, 'xt'] = self.net.bus_geodata.loc[bus_to, 'xt'] + dx
@@ -694,10 +738,17 @@ class Net:
             dxt = self.net.bus_geodata.loc[bus_to, 'xt'] - self.net.bus_geodata.loc[buses[0], 'xt'] + dx
             dy = self.net.bus_geodata.loc[bus_to, 'y'] - self.net.bus_geodata.loc[buses[0], 'y'] + dy
             dyt = self.net.bus_geodata.loc[bus_to, 'yt'] - self.net.bus_geodata.loc[buses[0], 'yt'] + dy
+        else:
+            dxt = dx
+            dyt = dy
         self.net.bus_geodata.loc[buses, 'x'] += dx
         self.net.bus_geodata.loc[buses, 'xt'] += dxt
         self.net.bus_geodata.loc[buses, 'y'] += dy
         self.net.bus_geodata.loc[buses, 'yt'] += dyt
+        for bus in buses:
+            if coords := self.net.bus_geodata.at[bus, 'coords']:
+                (x1, y1), (x2, y2) = coords
+                self.net.bus_geodata.at[bus, 'coords'] = [(x1 + dx, y1 + dy), (x2 + dx, y2 + dy)]
 
     def shift_text(self, buses, dx=0, dy=0):
         '''
@@ -716,8 +767,17 @@ class Net:
         if y1 > y2:
             y1, y2 = y2, y1
         buses = []
+        indexes = self.net.bus_geodata.index
         for i, bus_geodata in self.net.bus_geodata.iterrows():
-            if x1 <= bus_geodata['x'] <= x2 and y1 <= bus_geodata['y'] <= y2:
+            if i in indexes:
+                if x1 <= bus_geodata['x'] <= x2 and y1 <= bus_geodata['y'] <= y2:
+                    buses.append(i)
+        return buses
+
+    def select(self, func_coords):
+        buses = []
+        for i, bus_geodata in self.net.bus_geodata.iterrows():
+            if func_coords(bus_geodata['x'], bus_geodata['y']):
                 buses.append(i)
         return buses
 
@@ -732,7 +792,7 @@ class Net:
                 self.net.bus_geodata.loc[bus, 'y'] = y
                 self.net.bus_geodata.loc[bus, 'yt'] = y
 
-    def turn_right(self):
+    def turn_right(self): #TODO реализовать перемещение coords
         temp = self.net.bus_geodata.x
         tempt = self.net.bus_geodata.xt
         self.net.bus_geodata.x = self.net.bus_geodata.y
@@ -741,9 +801,31 @@ class Net:
         self.net.bus_geodata.yt = tempt
 
     def mirror_x(self):
+        # TODO реализовать перемещение coords
         self.net.bus_geodata.y *= -1
         self.net.bus_geodata.yt *= -1
 
     def mirror_y(self):
+        # TODO реализовать перемещение coords
         self.net.bus_geodata.x *= -1
         self.net.bus_geodata.xt *= -1
+
+    def get_coords(self):
+        return self.net.bus_geodata.to_dict()
+
+    def set_geodata(self, geodata: dict):
+        geodata['x'] = {int(key): value for key, value in geodata['x'].items()}
+        geodata['y'] = {int(key): value for key, value in geodata['y'].items()}
+        geodata['xt'] = {int(key): value for key, value in geodata['xt'].items()}
+        geodata['yt'] = {int(key): value for key, value in geodata['yt'].items()}
+        self.net.bus_geodata = pd.DataFrame.from_dict(geodata)
+
+    def drop_geodata(self, buses: int | tuple | list | None = None):
+        '''
+        Удаляет координаты для шин
+        :param buses: индексы шин. Если не задано то удаляет для всех шин
+        :return:
+        '''
+        if buses is None:
+            buses = self.net.bus_geodata.index
+        self.net.bus_geodata.drop(buses, inplace=True)

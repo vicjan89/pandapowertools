@@ -1,6 +1,7 @@
 import math
 
 import pandapower as pp
+import numpy as np
 from textengines.interfaces import *
 from pandapowertools.functions import split_str, define_c
 
@@ -28,20 +29,11 @@ def _node(x, y, text, te: TextEngine, length: int = 8, xt: int | None = None, yt
             yt += dy
 
 
-def _bus(x, y, quantity, text, te: TextEngine, dx: float = 2.0):
+def _bus(coords, text, te: TextEngine, xt: int | None = None, yt: int | None = None): #добавить толщину линии
     if isinstance(text, str):
         text = [text]
-    quantity -= 1
-    d = dx / 2
-    dr = r * 1.5
-    te.lines((x-d, y-dr), (x-d, y+dr), (x+(quantity-1) * dx + d, y + dr), (x+(quantity-1) * dx + d, y - dr),
-             cycle=True)
-    for i in range(quantity):
-        te.circle(x+i * dx, y, r=r, black=False)
-    dy = text_size * 1.2
-    for t in text:
-        te.label(x-0.3, y+0.1, text=t, place='ne', s=text_size)
-        y += dy
+    te.lines((coords[0][0], coords[0][1], 0.2, 0.2), (coords[1][0], coords[1][1], 0.2, 0.2))
+    te.label(xt-0.3, yt+0.1, text=' '.join(text), place='ne', s=text_size)
 
 def _line_straight(*args, te: TextEngine, text: str = '', length: int = 20):
     if isinstance(text, str):
@@ -92,14 +84,15 @@ def _line(*args, te: TextEngine, text: list[str] | str = '', length: int = 14):
     y = min(y1, y2)
     dx = text_size * 1.2
     x = x1 - r * 4
+    dy = r * 5
     for t in text:
         if len(t) > length:
             txts = split_str(t, length)
             for txt in txts[::-1]:
-                te.label(x, y+r, text=txt, s=text_size, place='ne', angle=90)
+                te.label(x, y+dy, text=txt, s=text_size, place='ne', angle=90)
                 x -= dx
         else:
-            te.label(x, y+r, text=t, s=text_size, place='ne', angle=90)
+            te.label(x, y+dy, text=t, s=text_size, place='ne', angle=90)
             x -= dx
 
 def _turn(x, y, xcenter, ycenter, angle):
@@ -145,8 +138,8 @@ def _switch_bus(x1, y1, x2, y2, te: TextEngine, closed: bool = False):
     middle_y = (y1 + y2) / 2
     angle = math.atan2(y2-y1, x2-x1)
     coords = _switch(middle_x, middle_y, angle, te, closed)
-    te.lines((x1+r, y1), coords[0])
-    te.lines((x2-r, y2), coords[1])
+    te.lines((x1, y1), coords[0])
+    te.lines((x2, y2), coords[1])
 
 def _switch_line(x1, y1, x2, y2, te: TextEngine, closed: bool = False):
     length = r * 6
@@ -349,7 +342,7 @@ def _capacitor(x, y, text, te: TextEngine):
     te.lines((x, y-d-r-d), (x, y-d-r))
     te.lines((x-w, y-d), (x+w, y-d))
     te.lines((x-w, y-d-r), (x+w, y-d-r))
-    _ground(x, y - d - d, te)
+    # _ground(x, y - d - d, te)
     dy = text_size * 1.2
     for t in text:
         te.label(x + w2, y - r, text=t, place='e', s=text_size)
@@ -364,9 +357,8 @@ def _ground(x, y, te: TextEngine):
     te.lines((x-w3, y-r*2), (x+w3, y-r*2))
 
 
-def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool = False, line_straight: bool = True,
-         voltage: bool = False, impedance: bool = False, length_node: int = 8, length_trafo: int = 6, length: int = 20,
-         plot_bus = True, bus_step: float = 2.):
+def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool = False,
+         voltage: bool = False, impedance: bool = False, length_node: int = 8, length_trafo: int = 6, length: int = 20):
     '''
     Plot pandapowerNet to TextEngine format
     :param net:
@@ -374,25 +366,11 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
     :param indexes: if True then plot inexes
     :param length_node: length of text row
     :param length_trafo: length of text row
-    :param bus: if True then plot bus as bus
     :return:
     '''
     #plot buses
-    nodes = []
-    buses = []
     bus_coords = {}
-    for i, bus in net.bus.iterrows():
-        if line_straight or not plot_bus:
-            nodes.append(i)
-        else:
-            connected = pp.toolbox.get_connected_elements_dict(net=net, buses=[i])
-            quantity = sum([len(item) for key, item in connected.items() if key != 'bus'])
-            if quantity > 3:
-                buses.append((i, quantity))
-            else:
-                nodes.append(i)
-        bus_coords[i] = (net.bus_geodata.loc[i, 'x'], net.bus_geodata.loc[i, 'y'])
-    for bus, quantity in buses:
+    for bus, bus_coords in net.bus_geodata.iterrows():
         text = [net.bus.loc[bus, 'name']]
         if ikz:
             text.append(f'Ik={net.res_bus_sc.loc[bus, "ikss_ka"]:.2f}кА')
@@ -400,49 +378,57 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
             text.append(f'V={net.res_bus.loc[bus, "vm_pu"]:.4f}')
         if indexes:
             text.append(f'({bus})')
-        _bus(net.bus_geodata.loc[bus, 'x'], net.bus_geodata.loc[bus, 'y'], quantity, text, te)
-    for node in nodes:
-        text = [net.bus.loc[node, 'name']]
-        if ikz:
-            text.append(f'Ik={net.res_bus_sc.loc[node, "ikss_ka"]:.2f} кА')
-        if voltage:
-            text.append(f'V={net.res_bus.loc[node, "vm_pu"]:.4f}')
-        if indexes:
-            text.append(f'({node})')
-        x = xt = net.bus_geodata.loc[node, 'x']
-        if 'xt' in net.bus_geodata:
-            xt = net.bus_geodata.loc[node, 'xt']
-        y = yt = net.bus_geodata.loc[node, 'y']
-        if 'yt' in net.bus_geodata:
-            yt = net.bus_geodata.loc[node, 'yt']
-        _node(x, y, text, te, length_node, xt, yt)
+        if bus_coords['coords']:
+            _bus(bus_coords['coords'], text, te, xt=bus_coords['xt'], yt=bus_coords['yt'])
+        else:
+            _node(bus_coords['x'], bus_coords['y'], text, te, length_node, bus_coords['xt'], bus_coords['yt'])
     #plot lines
     for i, line in net.line.iterrows():
         if line['in_service']:
             from_bus = line['from_bus']
             to_bus = line['to_bus']
-            parallel = net.line.loc[i, "parallel"]
-            if impedance:
-                l = line['length_km']
-                text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
-                _impedance(bus_coords[from_bus], bus_coords[to_bus], te, text, length)
-            else:
-                if line['c_nf_per_km']:
-                    text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
-                    if parallel > 1:
-                        text = f'{parallel}*{text}'
-                    if line_straight:
-                        _line_straight(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text, length=length)
-                    else:
-                        _line(bus_coords[from_bus], bus_coords[to_bus], te=te, text=text)
-                else:
+            if (from_bus in net.bus_geodata.index and to_bus in net.bus_geodata.index) or i in net.line_geodata.index:
+                parallel = net.line.loc[i, "parallel"]
+                x1, y1 = net.bus_geodata.loc[from_bus, ['x', 'y']]
+                x2, y2 = net.bus_geodata.loc[to_bus, ['x', 'y']]
+                if impedance:
                     l = line['length_km']
                     text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
-                    _reactor(*bus_coords[from_bus], *bus_coords[to_bus], te=te, text=text, length=length_trafo)
+                    _impedance((x1, y1), (x2, y2), te, text, length)
+                else:
+                    from_coords = net.bus_geodata.at[from_bus, 'coords']
+                    to_coords = net.bus_geodata.at[to_bus, 'coords']
+                    if from_coords and not to_coords:
+                        x1 = x2
+                        y1 = from_coords[0][1]
+                    if not from_coords and to_coords:
+                        x2 = x1
+                        y2 = to_coords[0][1]
+                    if from_coords and to_coords:
+                        xb1 = net.bus_geodata.at[from_bus, 'coords'][0][0]
+                        xe1 = net.bus_geodata.at[from_bus, 'coords'][1][0]
+                        xb2 = net.bus_geodata.at[to_bus, 'coords'][0][0]
+                        xe2 = net.bus_geodata.at[to_bus, 'coords'][1][0]
+                        coords_sorted = sorted([xb1, xb2, xe1, xe2])
+                        x1 = x2 = (coords_sorted[1] + coords_sorted[2]) / 2.0
+                        y1 = from_coords[0][1]
+                        y2 = to_coords[0][1]
+                    if line['std_type']:
+                        text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
+                        if parallel > 1:
+                            text = f'{parallel}*{text}'
+                        if i in net.line_geodata.index:
+                            _line(*net.line_geodata.loc[i, 'coords'], te=te, text=text)
+                        else:
+                            _line((x1, y1), (x2, y2), te=te, text=text)
+                    else:
+                        l = line['length_km']
+                        text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'
+                        _reactor(x1, y1, x2, y2, te=te, text=text, length=length_trafo)
     #plot ext_grid
     for _, ext_grid in net.ext_grid.iterrows():
-        if ext_grid['in_service']:
-            x, y = bus_coords[ext_grid['bus']]
+        if ext_grid['in_service'] and ext_grid['bus'] in net.bus_geodata.index:
+            x, y = net.bus_geodata.loc[ext_grid['bus'], ['x', 'y']]
             if impedance:
                 name = ext_grid['name']
                 if name is None:
@@ -467,70 +453,105 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                 _ext_grid(x, y, te=te)
     #plot trafo
     for _, trafo in net.trafo.iterrows():
-        x1, y1 = bus_coords[trafo['hv_bus']]
-        x2, y2 = bus_coords[trafo['lv_bus']]
-        if impedance:
-            ukx = math.sqrt(trafo['vk_percent'] ** 2 - trafo['vkr_percent'] ** 2)
-            kt = 0.95 * 1.1 / (1 + 0.6 * ukx / 100)
-            zt = trafo['vk_percent'] * trafo['vn_hv_kv'] ** 2 / 100 / trafo['sn_mva'] / kt
-            rt = kt * trafo['vkr_percent'] * trafo['vn_hv_kv'] ** 2 / 100 / trafo['sn_mva']
-            xt = math.sqrt(zt ** 2 - rt ** 2)
-            text = f'{rt:.3f}+j{xt:.3f} Ом'
-            _impedance((x1, y1), (x2, y2), te=te, text=text, length=length_trafo)
-        else:
+        hv_bus = trafo['hv_bus']
+        lv_bus = trafo['lv_bus']
+        if hv_bus in net.bus_geodata.index and lv_bus in net.bus_geodata.index:
+            x1, y1 = net.bus_geodata.loc[hv_bus, ['x', 'y']]
+            x2, y2 = net.bus_geodata.loc[lv_bus, ['x', 'y']]
+            if impedance:
+                ukx = math.sqrt(trafo['vk_percent'] ** 2 - trafo['vkr_percent'] ** 2)
+                kt = 0.95 * 1.1 / (1 + 0.6 * ukx / 100)
+                zt = trafo['vk_percent'] * trafo['vn_hv_kv'] ** 2 / 100 / trafo['sn_mva'] / kt
+                rt = kt * trafo['vkr_percent'] * trafo['vn_hv_kv'] ** 2 / 100 / trafo['sn_mva']
+                xt = math.sqrt(zt ** 2 - rt ** 2)
+                text = f'{rt:.3f}+j{xt:.3f} Ом'
+                _impedance((x1, y1), (x2, y2), te=te, text=text, length=length_trafo)
+            else:
+                text = [trafo['name']]
+                text.append(trafo['std_type'])
+                vector_group = ''
+                if 'vector_group' in trafo:
+                    vector_group = trafo['vector_group']
+                _trafo(x1, y1, x2, y2, text, te=te, length=length_trafo, vector_group=vector_group)
+    #plot trafo3w
+    for _, trafo in net.trafo3w.iterrows():
+        hv_bus = trafo['hv_bus']
+        mv_bus = trafo['mv_bus']
+        lv_bus = trafo['lv_bus']
+        if all(bus in net.bus_geodata.index for bus in [hv_bus, mv_bus, lv_bus]):
+            x1, y1 = net.bus_geodata.loc[hv_bus, ['x', 'y']]
+            x2, y2 = net.bus_geodata.loc[mv_bus, ['x', 'y']]
+            x3, y3 = net.bus_geodata.loc[lv_bus, ['x', 'y']]
             text = [trafo['name']]
             text.append(trafo['std_type'])
             vector_group = ''
             if 'vector_group' in trafo:
                 vector_group = trafo['vector_group']
-            _trafo(x1, y1, x2, y2, text, te=te, length=length_trafo, vector_group=vector_group)
-    #plot trafo3w
-    for _, trafo in net.trafo3w.iterrows():
-        x1, y1 = bus_coords[trafo['hv_bus']]
-        x2, y2 = bus_coords[trafo['mv_bus']]
-        x3, y3 = bus_coords[trafo['lv_bus']]
-        text = [trafo['name']]
-        text.append(trafo['std_type'])
-        vector_group = ''
-        if 'vector_group' in trafo:
-            vector_group = trafo['vector_group']
-        _trafo3w(x1, y1, x2, y2, x3, y3, text, te=te, vector_group=vector_group)
+            _trafo3w(x1, y1, x2, y2, x3, y3, text, te=te, vector_group=vector_group)
     #plot gen
     for _, gen in net.gen.iterrows():
-        x, y = bus_coords[gen['bus']]
-        text = [gen['name']]
-        text.append(f'{gen['p_mw']}МВт')
-        _gen(x, y, text, te=te)
+        bus = gen['bus']
+        if bus in net.bus_geodata.index:
+            x, y = net.bus_geodata.loc[bus, ['x', 'y']]
+            text = [gen['name']]
+            text.append(f'{gen['p_mw']}МВт')
+            _gen(x, y, text, te=te)
     #plot impedance
     for i, impedance in net.impedance.iterrows():
         from_bus = impedance['from_bus']
         to_bus = impedance['to_bus']
-        _reactor(*bus_coords[from_bus], *bus_coords[to_bus], te=te)
-
+        if from_bus in net.bus_geodata.index and to_bus in net.bus_geodata.index:
+            _reactor(*net.bus_geodata.at[from_bus, ['x', 'y']], *net.bus_geodata.at[to_bus, ['x', 'y']], te=te)
     #plot switch
     for i, switch in net.switch.iterrows():
         bus = switch['bus']
-        element = switch['element']
-        et = switch['et']
-        x1 = net.bus_geodata.at[bus, 'x']
-        y1 = net.bus_geodata.at[bus, 'y']
-        match et:
-            case 'b':
-                x2 = net.bus_geodata.at[element, 'x']
-                y2 = net.bus_geodata.at[element, 'y']
-                _switch_bus(x1, y1, x2, y2, te=te, closed=switch['closed'])
-            case 'l':
-                bus2 = net.line.at[element, 'from_bus'] if bus == net.line.at[element, 'to_bus'] else net.line.at[element, 'to_bus']
-                x2 = net.bus_geodata.at[bus2, 'x']
-                y2 = net.bus_geodata.at[bus2, 'y']
-                _switch_line(x1, y1, x2, y2, te=te, closed=switch['closed'])
+        if bus in net.bus_geodata.index:
+            element = switch['element']
+            et = switch['et']
+            x1 = net.bus_geodata.at[bus, 'x']
+            y1 = net.bus_geodata.at[bus, 'y']
+            match et:
+                case 'b':
+                    if element in net.bus_geodata.index:
+                        bus_coords1 = [(x1, y1)]
+                        if net.bus_geodata.at[bus, 'coords']:
+                            bus_coords1.extend(net.bus_geodata.at[bus, 'coords'])
+                        x2 = net.bus_geodata.at[element, 'x']
+                        y2 = net.bus_geodata.at[element, 'y']
+                        bus_coords2 = [(x2, y2)]
+                        if net.bus_geodata.at[element, 'coords']:
+                            bus_coords2.extend(net.bus_geodata.at[element, 'coords'])
+                        nearby_coords = None
+                        length_min = None
+                        for c1 in bus_coords1:
+                            for c2 in bus_coords2:
+                                length = math.sqrt((c1[0] - c2[0]) ** 2 + (c1[1] - c2[1]) ** 2)
+                                if length_min:
+                                    if length < length_min:
+                                        length_min = length
+                                        nearby_coords = c1, c2
+                                else:
+                                    length_min = length
+                        (x1, y1), (x2, y2) = nearby_coords
+                        _switch_bus(x1, y1, x2, y2, te=te, closed=switch['closed'])
+                case 'l':
+                    bus2 = net.line.at[element, 'from_bus'] if bus == net.line.at[element, 'to_bus'] else net.line.at[element, 'to_bus']
+                    if bus2 in net.bus_geodata.index:
+                        x2 = net.bus_geodata.at[bus2, 'x']
+                        y2 = net.bus_geodata.at[bus2, 'y']
+                        _switch_line(x1, y1, x2, y2, te=te, closed=switch['closed'])
 
     #plot shunt
     for _, shunt in net.shunt.iterrows():
-        if shunt['in_service']:
-            x, y = bus_coords[shunt['bus']]
+        bus = shunt['bus']
+        if shunt['in_service'] and bus in net.bus_geodata.index:
+            x, y = net.bus_geodata.loc[bus, ['x', 'y']]
             v = net.bus.at[shunt['bus'], 'vn_kv']
-            rc = v ** 2 / shunt['p_mw']
+            p_mw = shunt['p_mw']
+            if np.isnan(p_mw):
+                rc = 0
+            else:
+                rc = v ** 2 / shunt['p_mw']
             xc = v ** 2 / shunt['q_mvar']
             sign = '+'
             capacitor = False
@@ -538,9 +559,14 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                 xc = -xc
                 sign = '-'
                 capacitor = True
-            rc_str = f'{rc:4.4f}' if rc < 9999 else f'{rc:.4e}'
-            xc_str = f'{xc:4.4f}' if xc < 9999 else f'{xc:.4e}'
-            text = [f'{rc_str}{sign}j{xc_str}']
+            rc_str = f'{rc:.1f}' if rc < 9999 else f'{rc:.4e}'
+            xc_str = f'{xc:.1f}' if xc < 9999 else f'{xc:.4e}'
+            name = shunt['name']
+            if name is None:
+                name = ''
+            else:
+                name += ' '
+            text = [f'{name}{rc_str}{sign}j{xc_str}']
             if capacitor:
                 _capacitor(x, y, text, te=te)
             else:

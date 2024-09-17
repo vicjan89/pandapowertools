@@ -2301,7 +2301,7 @@ x0_ohm_per_km = 0.184
 c_nf_per_km = 350.0
 c0_nf_per_km = 350.0
 type = "cs"
-max_i_ka = 100
+max_i_ka = 0.288
 ["АПвПу2г-1*185/25"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/kabel-apvpu2g-1x185-25.html
 r_ohm_per_km = 0.0991
 x_ohm_per_km = 0.175
@@ -2310,7 +2310,7 @@ x0_ohm_per_km = 0.175
 c_nf_per_km = 420.0
 c0_nf_per_km = 420.0
 type = "cs"
-max_i_ka = 100
+max_i_ka = 0.364
 ["АПвПу2г-1*240/25"]
 r_ohm_per_km = 0.0754
 x_ohm_per_km = 0.17
