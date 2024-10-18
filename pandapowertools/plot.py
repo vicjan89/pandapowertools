@@ -68,19 +68,20 @@ def _line_straight(*args, te: TextEngine, text: str = '', length: int = 20):
 def _line(*args, te: TextEngine, text: list[str] | str = '', length: int = 14):
     if isinstance(text, str):
         text = [text]
-    if len(args) == 2:
-        (x1, y1), (x2, y2) = args
-        if y2 > y1:
-            x2 = x1
-            y2 -= r
-            y1 += r
-        else:
-            x1 = x2
-            y2 += r
-            y1 -= r
-        te.lines((x1, y1), (x2, y2))
-    else:
-        te.lines(*args)
+    # if len(args) == 2:
+    #     (x1, y1), (x2, y2) = args
+    #     if y2 > y1:
+    #         x2 = x1
+    #         y2 -= r
+    #         y1 += r
+    #     else:
+    #         x1 = x2
+    #         y2 += r
+    #         y1 -= r
+    #     te.lines((x1, y1), (x2, y2))
+    # else:
+    te.lines(*args)
+    (x1, y1), (x2, y2), *_ = args
     y = min(y1, y2)
     dx = text_size * 1.2
     x = x1 - r * 4
@@ -401,10 +402,10 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                     if from_coords and not to_coords:
                         x1 = x2
                         y1 = from_coords[0][1]
-                    if not from_coords and to_coords:
+                    elif not from_coords and to_coords:
                         x2 = x1
                         y2 = to_coords[0][1]
-                    if from_coords and to_coords:
+                    elif from_coords and to_coords:
                         xb1 = net.bus_geodata.at[from_bus, 'coords'][0][0]
                         xe1 = net.bus_geodata.at[from_bus, 'coords'][1][0]
                         xb2 = net.bus_geodata.at[to_bus, 'coords'][0][0]
@@ -420,7 +421,7 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                         if i in net.line_geodata.index:
                             _line(*net.line_geodata.loc[i, 'coords'], te=te, text=text)
                         else:
-                            _line((x1, y1), (x2, y2), te=te, text=text)
+                            _line_straight((x1, y1), (x2, y2), te=te, text=text)
                     else:
                         l = line['length_km']
                         text = f'{line["r_ohm_per_km"] * l / parallel:.3f}+j{line["x_ohm_per_km"] * l / parallel:.3f} Ом'

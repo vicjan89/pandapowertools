@@ -670,6 +670,8 @@ class Net:
             ny = nx
         self.net.bus_geodata.x *= nx
         self.net.bus_geodata.y *= ny
+        self.net.bus_geodata.xt *= nx
+        self.net.bus_geodata.yt *= ny
 
     def busxy(self, i, coords: tuple | None = None):
         if coords:
@@ -829,3 +831,7 @@ class Net:
         if buses is None:
             buses = self.net.bus_geodata.index
         self.net.bus_geodata.drop(buses, inplace=True)
+
+    def copy_coords_for_text(self):
+        self.net.bus_geodata['xt'] = self.net.bus_geodata['x']
+        self.net.bus_geodata['yt'] = self.net.bus_geodata['y']

@@ -2518,3 +2518,12 @@ c_nf_per_km = 370.0 #not exactly
 c0_nf_per_km = 370.0 #not exactly
 type = "cs"
 max_i_ka = 0.155
+["ПвП 1х400/35"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/pvp-10kv/kabel-pvp-1%D1%85400-35.html
+r_ohm_per_km = 0.0778
+x_ohm_per_km = 0.165
+r0_ohm_per_km = 0.0778 #not exactly
+x0_ohm_per_km = 0.165 #not exactly
+c_nf_per_km = 570.0
+c0_nf_per_km = 570.0
+type = "cs"
+max_i_ka = 0.633
