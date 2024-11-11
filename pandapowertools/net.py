@@ -171,10 +171,10 @@ class Net:
         '''
         Create extension grid
         :param bus: bus where the slack is connected
-        :param ikz_max: ikz in maximum mode in kiloampere
-        :param ikz_min: ikz in minimum mode in kiloampere
-        :param i1kz_max: single phase ikz in maximum mode in kiloampere
-        :param i1kz_min: single phase ikz in minimum mode in kiloampere
+        :param ikz_max: i short circuit 3 phase in maximum mode in kiloampere
+        :param ikz_min: i short circuit 3 phase in minimum mode in kiloampere
+        :param i1kz_max: single phase i short circuit in maximum mode in kiloampere
+        :param i1kz_min: single phase i short circuit in minimum mode in kiloampere
         :return:
         '''
         item = {'bus': bus}
@@ -304,6 +304,7 @@ class Net:
                     prefix = key[0] + '_'
                 attrs[f'{prefix}{russian_to_attribute_name(name_std)}'] = name_std
         self.std.__dict__.update(attrs)
+        print('Net loaded.')
 
     def scheme(self, find: str = ''):
         res = [f'name={self.net.name}']
