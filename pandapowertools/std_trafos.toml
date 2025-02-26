@@ -1138,6 +1138,33 @@
 "pfe_kw" = 4.0
 "i0_percent" = 2.5
 "shift_degree" = 0.0
+["ТС-2000_10.5"]
+"sn_mva" = 2.0
+"vn_hv_kv" = 10.5
+"vn_lv_kv" = 0.4
+"vk_percent" = 6.0 # not exactly
+"vkr_percent" = 1.0 # not exactly
+"pfe_kw" = 4.0 # not exactly
+"i0_percent" = 2.5 # not exactly
+"shift_degree" = 330.0 # not exactly
+["ТС-2500_10.5"]
+"sn_mva" = 2.5
+"vn_hv_kv" = 10.5
+"vn_lv_kv" = 0.4
+"vk_percent" = 6.0 # not exactly
+"vkr_percent" = 1.0 # not exactly
+"pfe_kw" = 4.0 # not exactly
+"i0_percent" = 2.5 # not exactly
+"shift_degree" = 330.0 # not exactly
+["ТС-3150_10.5"]
+"sn_mva" = 3.15
+"vn_hv_kv" = 10.5
+"vn_lv_kv" = 0.4
+"vk_percent" = 6.0 # not exactly
+"vkr_percent" = 1.0 # not exactly
+"pfe_kw" = 4.0 # not exactly
+"i0_percent" = 2.5 # not exactly
+"shift_degree" = 330.0 # not exactly
 ["ТСЗ-1000_10.5"]
 "sn_mva" = 1.0
 "vn_hv_kv" = 10.5

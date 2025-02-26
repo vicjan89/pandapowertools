@@ -16,7 +16,7 @@ def _node(x, y, text, te: TextEngine, length: int = 8, xt: int | None = None, yt
         xt = x
     if yt is None:
         yt = y
-    te.circle(x, y, r=r, black=False)
+    te.circle(x, y, r=r, black=True)
     dy = text_size * 1.2
     for t in text:
         if len(t) > length:
@@ -414,6 +414,11 @@ def plot(net: pp.pandapowerNet, te: TextEngine, indexes: bool = True, ikz: bool 
                         x1 = x2 = (coords_sorted[1] + coords_sorted[2]) / 2.0
                         y1 = from_coords[0][1]
                         y2 = to_coords[0][1]
+                    else:
+                        x1 = net.bus_geodata.at[from_bus, 'x']
+                        x2 = net.bus_geodata.at[to_bus, 'x']
+                        y1 = net.bus_geodata.at[from_bus, 'y']
+                        y2 = net.bus_geodata.at[to_bus, 'y']
                     if line['std_type']:
                         text = f'{net.line.loc[i, "std_type"]} {net.line.loc[i, "length_km"]} км'
                         if parallel > 1:

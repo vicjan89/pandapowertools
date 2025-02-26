@@ -1714,6 +1714,12 @@ x_ohm_per_km = 0.364
 c_nf_per_km = 4.97
 type = "ol"
 max_i_ka = 100
+["АСИ-95"]
+r_ohm_per_km = 0.33
+x_ohm_per_km = 0.353
+c_nf_per_km = 4.97
+type = "ol"
+max_i_ka = 100
 ["АСУ-50"]
 r_ohm_per_km = 0.63
 x_ohm_per_km = 0.374
@@ -2128,6 +2134,18 @@ x_ohm_per_km = 0.0717
 c_nf_per_km = 24.0
 type = "ol"
 max_i_ka = 100
+["СИП 1х95"] # https://cable.ru/questions/id-1985.php?srsltid=AfmBOopbBGW_gCweKYjko3lv3RGkpFGc48tVSFqUwLaHZ5LM7otmdUzf
+r_ohm_per_km = 0.363
+x_ohm_per_km = 0.284
+c_nf_per_km = 24.0 # не точно
+type = "ol"
+max_i_ka = 100
+["СИПт 1х95"] # https://cable.ru/questions/id-1985.php?srsltid=AfmBOopbBGW_gCweKYjko3lv3RGkpFGc48tVSFqUwLaHZ5LM7otmdUzf
+r_ohm_per_km = 0.363
+x_ohm_per_km = 0.284
+c_nf_per_km = 24.0 # не точно
+type = "ol"
+max_i_ka = 100
 ["СИП 3х16+1х35"]
 r_ohm_per_km = 1.91
 x_ohm_per_km = 0.0865
@@ -2284,6 +2302,24 @@ x_ohm_per_km = 0.083
 c_nf_per_km = 288.0
 type = "cs"
 max_i_ka = 100
+["АПвВнг(А)-LS 3x95/16_10кВ"] # https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng-ls-10kv/kabel-apvvng-ls-3x95-16.html
+r_ohm_per_km = 0.193
+x_ohm_per_km = 0.092
+r0_ohm_per_km = 0.193
+x0_ohm_per_km = 0.092
+c_nf_per_km = 320.0
+c0_nf_per_km = 320.0
+type = "cs"
+max_i_ka = 0.233
+["АПвПу-3*150/25"] # https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu-10kv/kabel-apvpu-3x150-25.html
+r_ohm_per_km = 0.124
+x_ohm_per_km = 0.085
+r0_ohm_per_km = 0.124
+x0_ohm_per_km = 0.085
+c_nf_per_km = 380.0
+c0_nf_per_km = 380.0
+type = "cs"
+max_i_ka = 0.3
 ["АПвПу-1*240/25"]
 r_ohm_per_km = 0.125
 x_ohm_per_km = 0.157
@@ -2291,6 +2327,24 @@ r0_ohm_per_km = 0.125
 x0_ohm_per_km = 0.157
 c_nf_per_km = 410.0
 c0_nf_per_km = 410.0
+type = "cs"
+max_i_ka = 100
+["АПвПу2г-1*95/16"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/kabel-apvpu2g-1x95-16.html
+r_ohm_per_km = 0.189
+x_ohm_per_km = 0.193
+r0_ohm_per_km = 0.189
+x0_ohm_per_km = 0.193
+c_nf_per_km = 320.0
+c0_nf_per_km = 320.0
+type = "cs"
+max_i_ka = 0.253
+["АПвПу2г-3*95/16"]
+r_ohm_per_km = 0.193
+x_ohm_per_km = 0.092
+r0_ohm_per_km = 0.193
+x0_ohm_per_km = 0.092
+c_nf_per_km = 320.0
+c0_nf_per_km = 320.0
 type = "cs"
 max_i_ka = 100
 ["АПвПу2г-1*120/25"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/apvpu2g-1x120/25.html
@@ -2329,6 +2383,24 @@ c_nf_per_km = 510.0
 c0_nf_per_km = 510.0
 type = "cs"
 max_i_ka = 0.476
+["АПвПу2г-1*400/70"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/apvpu2g-1x400/70.html
+r_ohm_per_km = 0.047
+x_ohm_per_km = 0.165
+r0_ohm_per_km = 0.047
+x0_ohm_per_km = 0.165
+c_nf_per_km = 570.0
+c0_nf_per_km = 570.0
+type = "cs"
+max_i_ka = 0.525
+["АПвПу2г-3х400/35-10"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu2g-10kv/apvpu2g-1x400/70.html
+r_ohm_per_km = 0.047
+x_ohm_per_km = 0.165
+r0_ohm_per_km = 0.047
+x0_ohm_per_km = 0.165
+c_nf_per_km = 570.0
+c0_nf_per_km = 570.0
+type = "cs"
+max_i_ka = 0.525
 ["АПвПу-3*120/25"]
 r_ohm_per_km = 0.253
 x_ohm_per_km = 0.166
@@ -2347,15 +2419,6 @@ c_nf_per_km = 290.0
 c0_nf_per_km = 290.0
 type = "cs"
 max_i_ka = 100
-["АПвПу2г-3*95/16"]
-r_ohm_per_km = 0.193
-x_ohm_per_km = 0.092
-r0_ohm_per_km = 0.193
-x0_ohm_per_km = 0.092
-c_nf_per_km = 320.0
-c0_nf_per_km = 320.0
-type = "cs"
-max_i_ka = 100
 ["АПвВнг-3*70/16-10кВ"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng/kabel-apvvng-3x70-16.html
 r_ohm_per_km = 0.268
 x_ohm_per_km = 0.196
@@ -2364,7 +2427,7 @@ x0_ohm_per_km = 0.196
 c_nf_per_km = 290.0
 c0_nf_per_km = 290.0
 type = "cs"
-max_i_ka = 100
+max_i_ka = 0.193
 ["АПвВнг-1*95-35кВ"] #obsidian\work\factory_documentation\Кабели силовые\Кабели из сшитого полиэтилена 6-35.pdf
 r_ohm_per_km = 0.320
 x_ohm_per_km = 0.128 #прокладка треугольником
@@ -2410,6 +2473,15 @@ c_nf_per_km = 410.0 #not exactly
 c0_nf_per_km = 410.0 #not exactly
 type = "cs"
 max_i_ka = 100
+["ЦАСБл 3*185"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x185.html
+r_ohm_per_km = 0.167
+x_ohm_per_km = 0.077
+r0_ohm_per_km = 0.167 #not exactly
+x0_ohm_per_km = 0.077 #not exactly
+c_nf_per_km = 410.0 #not exactly
+c0_nf_per_km = 410.0 #not exactly
+type = "cs"
+max_i_ka = 100
 ["ЦАСБл 3*150"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x150.html
 r_ohm_per_km = 0.206
 x_ohm_per_km = 0.079
@@ -2428,15 +2500,15 @@ c_nf_per_km = 410.0 #not exactly
 c0_nf_per_km = 410.0 #not exactly
 type = "cs"
 max_i_ka = 100
-["ЦАСБл 3*185"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x185.html
-r_ohm_per_km = 0.167
-x_ohm_per_km = 0.077
-r0_ohm_per_km = 0.167 #not exactly
-x0_ohm_per_km = 0.077 #not exactly
-c_nf_per_km = 410.0 #not exactly
-c0_nf_per_km = 410.0 #not exactly
+["ЦАСБл 3*95"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-bumazhno-propitannoj-izolyacziej/tsasbl-10kv/kabel-tsasbl-3x95.html
+r_ohm_per_km = 0.326
+x_ohm_per_km = 0.083
+r0_ohm_per_km = 0.326 #not exactly
+x0_ohm_per_km = 0.083 #not exactly
+c_nf_per_km = 300.0 #https://profsector.com/media/catalogs/58ccf0a6952a2.pdf
+c0_nf_per_km = 300.0 #not exactly
 type = "cs"
-max_i_ka = 100
+max_i_ka = 0.192
 ["ПвВ-70"] #https://www.ruscable.ru/info/wire/mark/pvv_kamkabel/
 r_ohm_per_km = 0.268
 x_ohm_per_km = 0.177
@@ -2453,6 +2525,24 @@ r0_ohm_per_km = 0.0991 #not exactly
 x0_ohm_per_km = 0.161 #not exactly
 c_nf_per_km = 370.0 #not exactly
 c0_nf_per_km = 370.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ПвПу2г-3(1х300/50-10)"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/pvpu2g-10kv/pvpu2g-1x300/70.html
+r_ohm_per_km = 0.1
+x_ohm_per_km = 0.167
+r0_ohm_per_km = 0.1 #not exactly
+x0_ohm_per_km = 0.167 #not exactly
+c_nf_per_km = 510.0 #not exactly
+c0_nf_per_km = 510.0 #not exactly
+type = "cs"
+max_i_ka = 100
+["ПвПу2г-3(1х300/70-10)"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/pvpu2g-10kv/pvpu2g-1x300/70.html
+r_ohm_per_km = 0.1
+x_ohm_per_km = 0.167
+r0_ohm_per_km = 0.1 #not exactly
+x0_ohm_per_km = 0.167 #not exactly
+c_nf_per_km = 510.0 #not exactly
+c0_nf_per_km = 510.0 #not exactly
 type = "cs"
 max_i_ka = 100
 ["КСВ 4000"]

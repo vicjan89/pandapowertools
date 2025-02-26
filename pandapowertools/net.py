@@ -73,6 +73,20 @@ class Net:
     def line(self, n, in_service = True):
         self.net.line.at[n, 'in_service'] = in_service
 
+    def line_replace_std_type(self, index: int, std_type: str):
+        '''
+        Replace standard type with new type for line with index
+        :param index: line index
+        :param std_type: standard type for new type
+        :return:
+        '''
+        from_bus = self.net.line.loc[index, "from_bus"]
+        to_bus = self.net.line.loc[index, "to_bus"]
+        length_km = self.net.line.loc[index, "length_km"]
+        parallel = self.net.line.loc[index, "parallel"]
+        self.net.line.drop(index, inplace=True)
+        self.add_line(from_bus=from_bus, to_bus=to_bus, length=length_km, std_type=std_type, parallel=parallel)
+
     def line_impedance(self, index: int):
         l = self.net.line.at[index, 'length_km']
         p = self.net.line.at[index, 'parallel']
@@ -485,7 +499,8 @@ class Net:
     def calc_c(self, bus: int):
         '''
         Создаёт режим для расчёта токов замыкания на землю в сетях с изолированной, компенсированнной или резистовной
-        нейтралью
+        нейтралью, выполняет расчёт токов замыкания на землю и восстанавливает предыдущий режим
+        Результаты сохраняются в res_line
         :param bus: номер шины на которой однофазное замыкание на землю
         :return:
         '''
