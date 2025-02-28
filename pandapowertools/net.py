@@ -34,6 +34,9 @@ class Net:
         self.et.trafo3w = 't3'
         self.et.bus = 'b'
 
+    def __repr__(self):
+        return self.get_scheme()
+
     def add_std(self):
         current_path = os.path.realpath(__file__)
         current_path = os.path.dirname(current_path)
@@ -321,6 +324,9 @@ class Net:
         print('Net loaded.')
 
     def scheme(self, find: str = ''):
+        print(self.get_scheme(find))
+
+    def get_scheme(self, find: str = ''):
         res = [f'name={self.net.name}']
         res.append('bus')
         for i, row in self.net.bus.sort_index().iterrows():
@@ -426,11 +432,9 @@ class Net:
             res.append(f'{i}) name={name} bus={name_bus} p_mw={row["p_mw"]:.5f} q_mvar={row["q_mvar"]:.5f}'
                        f' {r=} {x=} {in_service}')
         if find:
-            for row in res:
-                if find in row:
-                    print(row)
-        else:
-            print('\n'.join(res))
+            res = [row for row in res if find in row]
+        return '\n'.join(res)
+
 # modes
     def create_mode(self, name):
         self.net['modes'][name] = []
@@ -768,14 +772,16 @@ class Net:
                 (x1, y1), (x2, y2) = coords
                 self.net.bus_geodata.at[bus, 'coords'] = [(x1 + dx, y1 + dy), (x2 + dx, y2 + dy)]
 
-    def shift_text(self, buses, dx=0, dy=0):
+    def shift_bus_text(self, buses=None, dx=0, dy=0):
         '''
         Shift coords of texts buses.
-        :param buses:
+        :param buses: if None than all buses
         :param dx:
         :param dy:
         :return:
         '''
+        if not buses:
+            buses = self.net.bus_geodata.index
         self.net.bus_geodata.loc[buses, 'xt'] += dx
         self.net.bus_geodata.loc[buses, 'yt'] += dy
 

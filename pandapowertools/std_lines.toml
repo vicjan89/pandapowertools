@@ -2302,15 +2302,6 @@ x_ohm_per_km = 0.083
 c_nf_per_km = 288.0
 type = "cs"
 max_i_ka = 100
-["АПвВнг(А)-LS 3x95/16_10кВ"] # https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng-ls-10kv/kabel-apvvng-ls-3x95-16.html
-r_ohm_per_km = 0.193
-x_ohm_per_km = 0.092
-r0_ohm_per_km = 0.193
-x0_ohm_per_km = 0.092
-c_nf_per_km = 320.0
-c0_nf_per_km = 320.0
-type = "cs"
-max_i_ka = 0.233
 ["АПвПу-3*150/25"] # https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvpu-10kv/kabel-apvpu-3x150-25.html
 r_ohm_per_km = 0.124
 x_ohm_per_km = 0.085
@@ -2419,6 +2410,15 @@ c_nf_per_km = 290.0
 c0_nf_per_km = 290.0
 type = "cs"
 max_i_ka = 100
+["АПвВнг(А)-LS 3x95/16_10кВ"] # https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng-ls-10kv/kabel-apvvng-ls-3x95-16.html
+r_ohm_per_km = 0.193
+x_ohm_per_km = 0.092
+r0_ohm_per_km = 0.193
+x0_ohm_per_km = 0.092
+c_nf_per_km = 320.0
+c0_nf_per_km = 320.0
+type = "cs"
+max_i_ka = 0.233
 ["АПвВнг-3*70/16-10кВ"] #https://k-ps.ru/spravochnik/kabeli-silovyie/s-izolyacziej-iz-sshitogo-polietilena-10kv/apvvng/kabel-apvvng-3x70-16.html
 r_ohm_per_km = 0.268
 x_ohm_per_km = 0.196
@@ -2444,6 +2444,24 @@ r0_ohm_per_km = 0.641
 x0_ohm_per_km = 0.144 #прокладка треугольником
 c_nf_per_km = 121.0
 c0_nf_per_km = 121.0
+type = "cs"
+max_i_ka = 100
+["АПвВнг(A)-LS 3x(1x120/16-10)"] #obsidian\work\factory_documentation\Кабели силовые\Кабели из сшитого полиэтилена 6-35.pdf
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.148 #прокладка плоская
+r0_ohm_per_km = 0.253
+x0_ohm_per_km = 0.148 #прокладка плоская
+c_nf_per_km = 323.0
+c0_nf_per_km = 323.0
+type = "cs"
+max_i_ka = 100
+["АПвВнг(A)-LS 3x(1x120/25-10)"] #obsidian\work\factory_documentation\Кабели силовые\Кабели из сшитого полиэтилена 6-35.pdf
+r_ohm_per_km = 0.253
+x_ohm_per_km = 0.148 #прокладка плоская
+r0_ohm_per_km = 0.253
+x0_ohm_per_km = 0.148 #прокладка плоская
+c_nf_per_km = 323.0
+c0_nf_per_km = 323.0
 type = "cs"
 max_i_ka = 100
 ["АПвПу-3*50/16"]
