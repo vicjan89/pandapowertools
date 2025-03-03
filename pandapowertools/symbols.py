@@ -54,20 +54,29 @@ def bus_draw(coords, te: TextEngine):
     te.lines((coords[0][0], coords[0][1], 0.2, 0.2), (coords[1][0], coords[1][1], 0.2, 0.2))
 
 
-def line_draw(coords, te: TextEngine):
-    te.lines(*coords)
+# def line_draw(coords, te: TextEngine):
+#     te.lines(*coords)
 
 def turn(x, y, xcenter, ycenter, angle):
+    '''
+
+    :param x:
+    :param y:
+    :param xcenter:
+    :param ycenter:
+    :param angle: in radians
+    :return:
+    '''
     x_res = xcenter + (x - xcenter) * math.cos(angle) - (y - ycenter) * math.sin(angle)
     y_res = ycenter + (x - xcenter) * math.sin(angle) + (y - ycenter) * math.cos(angle)
     return x_res, y_res
 
-def _switch(x, y, angle, te: TextEngine, closed: bool = True, text: str = ''):
+def switch_draw(x, y, angle, te: TextEngine, closed: bool = True, text: str = ''):
     '''
     Draw switch on text engine
     :param x: center of switch
     :param y: center of switch
-    :param angle: turn switch
+    :param angle: turn switch in radians
     :param te: TextEngine
     :param closed: switch closes if True else open
     :param text: note for switch
@@ -83,7 +92,7 @@ def _switch(x, y, angle, te: TextEngine, closed: bool = True, text: str = ''):
     for xc, yc in ((xlt, ylt), (xrt, yrt), (xrb, yrb), (xlb, ylb),
                    (x, y + size), (x, y - size),
                    (x - size, y), (x + size, y)):
-        coords.append(_turn(xc, yc, x, y, angle))
+        coords.append(turn(xc, yc, x, y, angle))
     te.lines(*coords[:-4], cycle=True)
     if closed:
         te.lines(coords[-2], coords[-1])
@@ -276,7 +285,7 @@ def _trafo3w(x1, y1, x2, y2, x3, y3, text, te: TextEngine, vector_group: str = '
         te.label(x1 + r + r_trafo, y_midle, text=t, place='e', s=text_size)
         y_midle -= dy
 
-def _ext_grid(x, y, te: TextEngine):
+def ext_grid_draw(x, y, te: TextEngine):
     d = 0.5
     d2 = d * 2
     d3 = d * 3
@@ -291,7 +300,7 @@ def _ext_grid(x, y, te: TextEngine):
     te.lines((x+d, y+d3+dy), (x, y+d4+dy))
     te.lines((x, y+d2+dy), (x-d, y+d3+dy))
 
-def _gen(x, y, text, te: TextEngine):
+def gen_draw(x, y, text, te: TextEngine):
     d = 0.5
     d2 = d * 2
     r_gen = r * 4

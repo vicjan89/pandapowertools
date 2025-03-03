@@ -47,7 +47,19 @@ def plot2(net: pp.pandapowerNet, te: TextEngine, isc: bool = True,
                                                                      * l / parallel:.3f} Ом'
             diagram.add_line(index=i, bus1_index=from_bus, bus2_index=to_bus, text=text,
                              lenght=length_line)
+    for i, gen in net.gen.iterrows():
+        if gen['in_service']:
+            text = (gen['name'], f'{gen['p_mw'] * 1000:,.1f}кВт')
+            diagram.add_gen(index=i, bus_index=gen['bus'], text=text)
 
+    for i, ext_grid in net.ext_grid.iterrows():
+        if ext_grid['in_service']:
+            diagram.add_ext_grid(i, ext_grid['bus'])
+
+    for i, switch in net.switch.iterrows():
+        diagram.add_switch(index=i, bus_index=switch['bus'], et=switch['et'],
+                           element_index=switch['element'],
+                           closed=switch['closed'])
     diagram.draw()
 
 
